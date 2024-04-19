@@ -1,5 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html
+       >
+<html lang="en"
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +17,7 @@
         font-family: Arial, Helvetica, sans-serif;
     }
 
-    header {
+    div {
         background-color: #1F2544;
         display: flex;
         justify-content: end;
@@ -38,7 +42,7 @@
 
 </style>
 <body>
-    <header style="height: 60px">
+    <div th:fragment="header" style="height: 60px" >
         <a class="logo" style="margin-left: 6px; margin-top: 4px">
             <img th:src="@{../../images/logologoAppleWorld.png}" alt="logo">
         </a>
@@ -49,7 +53,7 @@
             </ul>
         </nav>
         <a class="profile"><i class="fas fa-user-circle" style="color: white; font-size: 40px; padding-right: 30px; padding-left: 50px"></i></a>
-    </header>
+    </div>
     <form th:action="@{/logout}" method="POST">
         <button type="submit">Logout</button>
     </form>

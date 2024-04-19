@@ -4,12 +4,14 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 import com.applestore.applestore.Entities.UserEntity;
 import com.applestore.applestore.Security.Oauth2.CustomOAuth2User;
 import com.applestore.applestore.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
@@ -77,22 +79,22 @@ public class UserController {
     @GetMapping("/customer_info")
     public String CustomerInfo(Model model,Authentication authentication) {
     	
-    	CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
-        
+//    	CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
+        UserEntity user = curUser();
     	CustomerDto customerDto = new CustomerDto();
-		customerDto = customerService.getCustomerByuserId(customUserDetails.getUser_id());
+		customerDto = customerService.getCustomerByuserId(user.getUser_id());
 		model.addAttribute("customerDto", customerDto);
-    	model.addAttribute("user", customUserDetails);
+    	model.addAttribute("user", user);
     	
         return "/Fragments/user/customer_info";
     }
     
     @GetMapping("/edit")
     public String Edit(Model model,Authentication authentication) {
-    	CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
-        
+//    	CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
+        UserEntity user = curUser();
     	CustomerDto customerDto = new CustomerDto();
-		customerDto = customerService.getCustomerByuserId(customUserDetails.getUser_id());
+		customerDto = customerService.getCustomerByuserId(user.getUser_id());
 		model.addAttribute("customerDto", customerDto);
     	
         return "/Fragments/user/Edit";
@@ -107,9 +109,9 @@ public class UserController {
             Authentication authentication,
             Model model
     ){  
-        CustomUserDetails u = (CustomUserDetails) authentication.getPrincipal();
-        
-        CustomerDto customerDto = customerService.getCustomerByuserId(u.getUser_id());
+//        CustomUserDetails u = (CustomUserDetails) authentication.getPrincipal();
+        UserEntity user = curUser();
+        CustomerDto customerDto = customerService.getCustomerByuserId(user.getUser_id());
         Customer customer = customerService.getCustomerById1(customerDto.getCustomer_id());
         customer.setAddress_line(address_line);
         customer.setCountry(country);
@@ -119,7 +121,7 @@ public class UserController {
         
         
         model.addAttribute("customerDto", customer);
-        model.addAttribute("user", u);
+        model.addAttribute("user", user);
         
         return "/Fragments/user/customer_info";
     }
@@ -141,9 +143,10 @@ public class UserController {
             Authentication authentication,
             Model model
     ){  
-        CustomUserDetails u = (CustomUserDetails) authentication.getPrincipal();
+//        CustomUserDetails u = (CustomUserDetails) authentication.getPrincipal();
+        UserEntity user = curUser();
         CustomerDto customerDto = new CustomerDto();
-        customerDto.setUser_id(u.getUser_id());
+        customerDto.setUser_id(user.getUser_id());
         customerDto.setAddress_line(address_line);
         customerDto.setCountry(country);
         customerDto.setCity(city);
@@ -154,18 +157,44 @@ public class UserController {
 
 
         model.addAttribute("customerDto", customerDto);
-        model.addAttribute("user", u);
+        model.addAttribute("user", user);
 
         return "/Fragments/user/customer_info";
     }
 
 	
     @GetMapping("products")
-    public String products(Model model){
-    	List<ProductDto> listAllProduct = new ArrayList<>();
-    	listAllProduct = productService.listALlProduct();
-    	model.addAttribute("products", listAllProduct);
-    			
+    public String products(Model model, @Param("search") String search, @Param("comboBox") String price, @Param("color") String color){
+
+        List<ProductDto> listAllProduct = new ArrayList<>();
+        List<String> listColor = productService.getAllColor();
+        System.out.println("Color: "+color);
+        if (search == null && price == null && color == null || Objects.equals(color, "")) {
+            System.out.println("Normal list: ");
+            listAllProduct = productService.listALlProduct();
+        }
+        else if (search != null){
+            System.out.println("Search result: ");
+            listAllProduct = productService.findProductByName(search);
+        }
+        else {
+            if (price != null){
+                if (price.equals("asc")){
+                    System.out.println("List ordered asc: ");
+                    listAllProduct = productService.getAllOrderByPrice(true);
+                } else if (price.equals("desc")){
+                    System.out.println("List ordered desc: ");
+                    listAllProduct = productService.getAllOrderByPrice(false);
+                }
+            } else {
+                listAllProduct = productService.getProductByColor(color);
+            }
+        }
+        model.addAttribute("listAllProduct", listAllProduct);
+        model.addAttribute("listColor", listColor);
+        System.out.println("SelectedItem: " + price);
+        System.out.println("SelectedColor: " + color);
+
     	return "/Fragments/user/products";
     }
     
@@ -175,9 +204,12 @@ public class UserController {
     		Authentication authentication,
     		Model model){
     	
-    	CustomUserDetails u = (CustomUserDetails) authentication.getPrincipal();
+//
     	CustomerDto customerDto = new CustomerDto();
-    	customerDto = customerService.getCustomerByuserId(u.getUser_id());
+//        CustomUserDetails u = (CustomUserDetails) authentication.getPrincipal();
+        UserEntity user = curUser();
+
+        customerDto = customerService.getCustomerByuserId(user.getUser_id());
     	
         Product product = productService.getProductById(productId);
         ProductDto productDto = productService.convertProductToDto(product);
@@ -198,9 +230,10 @@ public class UserController {
             Model model
     		
     ) {	
-    	CustomUserDetails u = (CustomUserDetails) authentication.getPrincipal();
+//    	CustomUserDetails u = (CustomUserDetails) authentication.getPrincipal();
+        UserEntity user = curUser();
 		CustomerDto customerDto = new CustomerDto();
-		customerDto = customerService.getCustomerByuserId(u.getUser_id());	
+		customerDto = customerService.getCustomerByuserId(user.getUser_id());
 		
 		LocalDate currentDate = LocalDate.now();
 	    String formattedDate = currentDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
@@ -229,9 +262,10 @@ public class UserController {
     public String purchaseHistory(
     		Authentication authentication,
     		Model model){
-    	CustomUserDetails u = (CustomUserDetails) authentication.getPrincipal();
+//    	CustomUserDetails u = (CustomUserDetails) authentication.getPrincipal();
+        UserEntity user = curUser();
 		CustomerDto customerDto = new CustomerDto();
-		customerDto = customerService.getCustomerByuserId(u.getUser_id());	
+		customerDto = customerService.getCustomerByuserId(user.getUser_id());
 		
 		List<detailOrderDto> listOrder1 = new ArrayList<>();
 		listOrder1 = orderService.getDetailOrderByCustomerId(customerDto.getCustomer_id());

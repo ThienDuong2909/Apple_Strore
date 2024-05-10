@@ -8,9 +8,9 @@
 </head>
 <body>
 <header>
-<h1>Admin page</h1>
 	<div>
-		<div th:replace = "Fragments/admin/header::header"></div>
+<!--		<div th:replace = "Fragments/admin/header::header"></div>-->
+		<div th:replace= "~{Fragments/admin/header::header}"></div>
 	</div>
 	<section>
 		<div>
@@ -18,7 +18,7 @@
 		</div>
 	</section>
 	<div>
-		<div th:replace = "Fragments/admin/footer::footer"></div>
+		<div th:replace = "~{Fragments/admin/footer::footer}"></div>
 	</div>
 </header>
 </body>

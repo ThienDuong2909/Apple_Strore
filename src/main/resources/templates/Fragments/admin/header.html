@@ -43,16 +43,16 @@
 </style>
 <body>
     <div th:fragment="header" style="height: 60px" >
-        <a class="logo" style="margin-left: 6px; margin-top: 4px">
-            <img th:src="@{../../images/logologoAppleWorld.png}" alt="logo">
-        </a>
-        <nav>
-            <ul class="nav__links" style="list-style: none; border-radius: 50px; align-items: center">
-                <li><input type="text" placeholder="Tìm kiếm" style="font-family: inherit; font-size: inherit;height: 30px; margin: 2px; border-radius: 50px; padding-left: 10px; border-style: hidden; outline: none"></li>
-                <li><i class="fas fa-search" style="font-size: 25px; color: black; cursor: pointer; padding-right: 5px; padding-top: 5px"></i></li>
-            </ul>
-        </nav>
-        <a class="profile"><i class="fas fa-user-circle" style="color: white; font-size: 40px; padding-right: 30px; padding-left: 50px"></i></a>
+<!--        <a class="logo" style="margin-left: 6px; margin-top: 4px">-->
+<!--            <img th:src="@{../../images/logologoAppleWorld.png}" alt="logo">-->
+<!--        </a>-->
+<!--        <nav>-->
+<!--            <ul class="nav__links" style="list-style: none; border-radius: 50px; align-items: center">-->
+<!--                <li><input type="text" placeholder="Tìm kiếm" style="font-family: inherit; font-size: inherit;height: 30px; margin: 2px; border-radius: 50px; padding-left: 10px; border-style: hidden; outline: none"></li>-->
+<!--                <li><i class="fas fa-search" style="font-size: 25px; color: black; cursor: pointer; padding-right: 5px; padding-top: 5px"></i></li>-->
+<!--            </ul>-->
+<!--        </nav>-->
+<!--        <a class="profile"><i class="fas fa-user-circle" style="color: white; font-size: 40px; padding-right: 30px; padding-left: 50px"></i></a>-->
     </div>
     <form th:action="@{/logout}" method="POST">
         <button type="submit">Logout</button>

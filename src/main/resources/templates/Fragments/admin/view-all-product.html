@@ -21,8 +21,6 @@
             href="https://site-assets.fontawesome.com/releases/v5.15.4/css/all.css"
     >
 
-    <script src="/static/JS/editInforProduct.js"></script>
-
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -81,9 +79,11 @@
 
     <div id="tableArea">
         <div id="rollback-wrapper">
-            <button id="rollback-btn">
-                <a href="/admin/viewAll" id="desination"><i class="far fa-sync-alt" id="reload-icon" style="color: #032D3C;font-size: 20px"></i></a>
-            </button>
+           <form th:action="@{/admin/viewAll}" id="reload-form">
+               <button type="button" id="rollback-btn">
+                   <i class="far fa-sync-alt" id="reload-icon" style="color: #032D3C;font-size: 20px"></i>
+               </button>
+           </form>
         </div>
         <div class="tableWrapper">
             <table class="productTable">
@@ -242,9 +242,7 @@
         </div>
     </div>
 </div>
-</section>
-</body>
-
+<script type="text/javascript" th:src="@{/js/editInforProduct.js}"></script>
 <script>
     const editFormWrapper = document.querySelector('.back-ground-wrapper')
     const edit_btn = document.querySelector('.editBtn')
@@ -326,5 +324,19 @@
         });
     });
 
+    $("#reload-icon").click(function () {
+        $(this).style.active.animation = 'rotate(360deg) 1s ease-in-out'
+    })
+
+    $("#rollback-wrapper").click(function () {
+        setTimeout(function() {
+            console.log("Click")
+            $("#reload-form").submit()
+        }, 2000);
+    })
+
+
 </script>
+</section>
+</body>
 </html>

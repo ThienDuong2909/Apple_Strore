@@ -241,15 +241,14 @@ h1 {
     font-size: 16px;
 }
 
-#reload-icon:active{
-    animation: rotate .2s ease-in-out;
+#reload-icon :active {
+    animation: rotate 1s ease-in-out;
 }
 
 @keyframes rotate {
     from {
         transform: rotate(0deg);
     }
-
     to {
         transform: rotate(360deg);
     }
@@ -665,10 +664,3 @@ button:hover, .upload-btn:hover {
     background-color: #ED2B2A;
     color: white;
 }
-
-
-
-
-
-
-

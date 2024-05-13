@@ -3,59 +3,41 @@
 <html lang="en"
 		xmlns:th="http://www.thymeleaf.org"
 		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{Layouts/admin-main.html}"
       >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang chủ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/assets/css/layout/header.css}" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 </head>
-<style>
-    *{
-        margin: 0;
-        padding: 0;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
-    div {
-        background-color: #1F2544;
-        display: flex;
-        justify-content: end;
-        align-items: center;
-        margin: 5px;
-        border-radius: 18px;
-    }
-
-    .logo{
-        cursor: pointer;
-        margin-right: auto;
-    }
-
-    .profile {
-        cursor: pointer;
-    }
-
-    .nav__links {
-        display: flex;
-        background-color: white;
-    }
-
-</style>
 <body>
-    <div th:fragment="header" style="height: 60px" >
-<!--        <a class="logo" style="margin-left: 6px; margin-top: 4px">-->
-<!--            <img th:src="@{../../images/logologoAppleWorld.png}" alt="logo">-->
-<!--        </a>-->
-<!--        <nav>-->
-<!--            <ul class="nav__links" style="list-style: none; border-radius: 50px; align-items: center">-->
-<!--                <li><input type="text" placeholder="Tìm kiếm" style="font-family: inherit; font-size: inherit;height: 30px; margin: 2px; border-radius: 50px; padding-left: 10px; border-style: hidden; outline: none"></li>-->
-<!--                <li><i class="fas fa-search" style="font-size: 25px; color: black; cursor: pointer; padding-right: 5px; padding-top: 5px"></i></li>-->
-<!--            </ul>-->
-<!--        </nav>-->
-<!--        <a class="profile"><i class="fas fa-user-circle" style="color: white; font-size: 40px; padding-right: 30px; padding-left: 50px"></i></a>-->
+    <div th:fragment="header" style="height: 60px" id="wrapper__header" >
+        <div id="wrapper__logo__manage">
+            <div id="wrapper__logo">
+                <img th:src="@{../../images/logologoAppleWorld.png}" style="height: 40px">
+            </div>
+            <div id="wrapper__manage">
+                <div id="wrapper__manage__product" class="manage__item">
+                    <h3 class="manage__name" id="manage__product">Sản phẩm</h3>
+                </div>
+                <div id="wrapper__manage__order" class="manage__item">
+                    <h3 class="manage__name" id="manage__order">Đơn hàng</h3>
+                </div>
+            </div>
+        </div>
+
+        <form th:action="@{/logout}" method="POST" id="logout__form">
+            <button type="submit" id="logout__btn">
+                <i class="fas fa-sign-out-alt" id="logout__icon"></i>
+            </button>
+        </form>
     </div>
-    <form th:action="@{/logout}" method="POST">
-        <button type="submit">Logout</button>
-    </form>
+    <script th:src="@{/JS/header.js}"></script>
 </body>
 </html>

@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-variation-settings: "slnt" 0;
+}
+
+#wrapper__title {
+    background-color: #e6e6e6;
+}
+
+#content__title {
+    padding: 40px 30px;
+    color: black;
+}
+
+th, td {
+    text-align: center;
+    vertical-align: middle;
+    font-weight: 500;
+}
+
+#header__row > th{
+    background-color: #f3f3f3;
+    border: none;
+    text-wrap: none;
+    font-weight: bold;
+    text-align: center;
+    color: #505050;
+}
+
+#body__row {
+    height: 60px;
+    cursor: default;
+}

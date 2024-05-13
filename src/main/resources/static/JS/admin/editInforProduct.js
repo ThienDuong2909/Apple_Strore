@@ -3,9 +3,39 @@ const edit_btn = document.querySelector('.editBtn')
 const addNewFormWrapper = document.querySelector('.back-ground-wrapper-add')
 const confirmDialog = document.querySelector('.back-ground-wrapper-confirm')
 const cancel_btn = document.querySelector(".btn-second")
+const backgroundAddNew = document.querySelector('.back-ground-wrapper-add')
+const addingWrapper = document.querySelector('.adding-form-wrapper')
+const backgroundEdit = document.querySelector('.back-ground-wrapper')
+const wrapperEditForm = document.querySelector('#edit-form-wrapper')
+const backgroundConfirm = document.querySelector('.back-ground-wrapper-confirm')
+const wrapperConfirmForm = document.querySelector('.confirm-form-wrapper')
+
+backgroundAddNew.addEventListener('click', () => {
+    backgroundAddNew.style.display = 'none'
+})
+
+addingWrapper.addEventListener('click', (e) => {
+    e.stopPropagation()
+})
+
+backgroundEdit.addEventListener('click', () => {
+    backgroundEdit.style.display = 'none'
+})
+
+wrapperEditForm.addEventListener('click', (e) => {
+    e.stopPropagation()
+})
+
+backgroundConfirm.addEventListener('click', () => {
+    backgroundConfirm.style.display = 'none'
+})
+
+wrapperConfirmForm.addEventListener('click', (e) => {
+    e.stopPropagation()
+})
+
 function openEditModal (wrapper){
     wrapper.style.display = 'flex';
-    // console.log("Open modal")
 }
 
 function closeEditModal (wrapper) {
@@ -78,14 +108,10 @@ $(document).ready(function() {
     });
 });
 
-$("#reload-icon").click(function () {
-    $(this).style.active.animation = 'rotate(360deg) 1s ease-in-out'
-})
-
 $("#rollback-wrapper").click(function () {
     setTimeout(function() {
         console.log("Click")
         $("#reload-form").submit()
-    }, 2000);
+    }, 200);
 })
 

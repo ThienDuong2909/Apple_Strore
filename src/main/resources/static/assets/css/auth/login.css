@@ -89,6 +89,42 @@ label {
     border: 2px solid #e4e4e4;
 }
 
+#input__password__login {
+    width: 100%;
+    border: 2px solid #e4e4e4;
+    border-radius: 50px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#password {
+    width: 85%;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    font-size: 18px;
+}
+
+#show__hide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15%;
+}
+
+#show__password, #hide__password {
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+#toggle__password:hover {
+    scale: 1.1;
+}
+
 #login__btn {
     border: none;
     padding: 20px 0;

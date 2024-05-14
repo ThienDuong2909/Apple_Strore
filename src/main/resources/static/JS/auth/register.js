@@ -11,6 +11,8 @@ const regPassword = document.getElementById('reg__password')
 const regUsername = document.getElementById('reg__username')
 const regFirstName = document.getElementById('reg__first__name')
 const inputTags = document.getElementsByTagName('input')
+const showPasswordReg = document.getElementById('show__password__reg')
+const hidePasswordReg = document.getElementById('hide__password__reg')
 
 for (let i = 0; i < inputTags.length; i++) {
     inputTags[i].addEventListener('input', () => {
@@ -60,9 +62,24 @@ registerBtn.addEventListener('click', (e) => {
     if (inputFName.value !== '' && inputLName.value !== '' && inputEmail.value !== '' && inputPassword.value !== '' && inputUsername.value !== '' && inputEmail.value.includes('@')) {
         document.getElementById('register__form').submit()
     }
-    if (successStatus.value === 'true') {
-        setTimeout(() => {
-            window.location.href = '/login'
-        }, 2000)
+})
+
+showPasswordReg.addEventListener('click', (e) => {
+    if (inputPassword.type === 'password') {
+        inputPassword.type = 'text';
+        // showPasswordReg.hidden = true
+        // hidePasswordReg.hidden = false
+        showPasswordReg.style.display = 'none'
+        hidePasswordReg.style.display = 'flex'
+    }
+})
+
+hidePasswordReg.addEventListener('click', (e) => {
+    if (inputPassword.type === 'text') {
+        inputPassword.type = 'password'
+        // showPasswordReg.hidden = false
+        // hidePasswordReg.hidden = true
+        showPasswordReg.style.display = 'flex'
+        hidePasswordReg.style.display = 'none'
     }
 })

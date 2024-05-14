@@ -14,7 +14,7 @@
         <div class="outside__register__form">
             <div class="wrapper__register__form">
                 <div class="wrapper__title__register">
-                    <h3 id="title__register">Đăng kí tài khoản</h3>
+                    <h3 id="title__register">ĐĂNG KÍ TÀI KHOẢN</h3>
                 </div>
                 <div th:if = "${param.success}" class="successful__register">
                     <a th:href="@{/login}" id="redirect__login">
@@ -58,15 +58,21 @@
                     </div>
                     <div class="each__field">
                         <label>Mật khẩu</label>
-                        <input
-                                id="input__password"
-                                type="password"
-                                class="form-control"
-                                placeholder="*****"
-                                th:field="*{password}">
+                        <div id="wrapper__input__password">
+                            <input
+                                    id="input__password"
+                                    type="password"
+                                    class="form-control"
+                                    placeholder="*****"
+                                    th:field="*{password}">
+                            <div id="show__hide__reg">
+                                <i class="fas fa-eye" id="show__password__reg"></i>
+                                <i class="fas fa-eye-slash" id="hide__password__reg" style="display: none"></i>
+                            </div>
+                        </div>
                         <p id="reg__password">Vui lòng nhập mật khẩu</p>
-
                     </div>
+
                     <div class="each__field">
                         <label>Email</label>
                         <input

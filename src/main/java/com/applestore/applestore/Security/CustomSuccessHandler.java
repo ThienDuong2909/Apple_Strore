@@ -53,7 +53,7 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
         if (isUser) {
             return "/user/";
         } else if (isAdmin) {
-            return "/admin/";
+            return "/admin/viewAll";
         } else {
             throw new IllegalStateException();
         }

@@ -20,12 +20,18 @@
                 <div id="wrapper__input__login">
                     <div id="wrapper__input__username">
                         <label for="username">Tên đăng nhập</label>
-                        <input type="text" id="username" name="username">
+                        <input type="text" id="username" name="username" autocomplete="off">
                         <p id="fill__username">Vui lòng nhập tên đăng nhập</p>
                     </div>
                     <div id="wrapper__input__password">
                         <label for="password">Mật khẩu</label>
-                        <input type="password" id="password" name="password">
+                        <div id="input__password__login">
+                            <input type="password" id="password" name="password" autocomplete="off">
+                            <div id="show__hide">
+                                <i class="fas fa-eye" id="show__password"></i>
+                                <i class="fas fa-eye-slash" id="hide__password" hidden></i>
+                            </div>
+                        </div>
                         <p id="fill__password">Vui lòng nhập mật khẩu</p>
                     </div>
                 </div>

@@ -112,14 +112,15 @@ public class AuthController {
     private void sendMail(String gmail, String rspwLink) throws MessagingException, UnsupportedEncodingException {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
-        helper.setFrom("addmmin4567@gmail.com", "AppleStore");
+        helper.setFrom("addmmin4567@gmail.com", "AppleWorld");
         helper.setTo(gmail);
-        String subject = "Reset your password";
-        String content = "<p>Hello, </p>"
-                +"<p>You have requested to reset your password.</p>"
-                +"<p>Click the link below to chage your password.</p>"
-                +"<p><b><a href=\""+rspwLink + "\">Change my password<a/></b></p>"
-                +"<p>Ignore this email if you do remember your password or you have not ade the request.</p>";
+        String subject = "Đặt lại mật khẩu";
+        String content = "<p>AppleWorld xin chào, </p>"
+                +"<p>Chúng tôi nhận được yêu cầu đặt lại mật khẩu từ bạn.</p>"
+                +"<p>Vui lòng bấm vào liên kết bên dưới để tiến hành đặt lại mật khẩu.</p>"
+                +"<p><b><a href=\""+rspwLink + "\">Đặt lại mật khẩu<a/></b></p>"
+                +"<p>Vui lòng không phản hồi lại mail này hoặc bỏ qua mail này nếu bạn không còn nhu cầu nữa.</p>"
+                +"<p>Trân trọng cảm ơn!.</p>";
 
         helper.setSubject(subject);
         helper.setText(content,true);

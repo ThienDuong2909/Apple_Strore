@@ -59,7 +59,7 @@ public class SecurityConfig  {
 
                 .authorizeHttpRequests(authz -> authz
 //                                .requestMatchers("/", "/**")
-                .requestMatchers("/login", "/register", "/register/admin", "/forgot-password", "/reset-password*", "/oauth2/**")
+                .requestMatchers("/login", "/register", "/register/admin", "/forgot-password", "/reset-password*", "/oauth2/**", "/static/**", "/assets/**", "/images/**", "/JS/**")
                 .permitAll()
                 .requestMatchers("/admin","/admin/**").hasRole("ADMIN")
                 .requestMatchers("/user","/user/", "/user/**").hasRole("USER")

@@ -3,6 +3,8 @@ const inputUsername = document.getElementById('username');
 const inputPassword = document.getElementById('password');
 const emptyUsername = document.getElementById('fill__username');
 const emptyPassword = document.getElementById('fill__password');
+const showPassword = document.getElementById('show__password');
+const hidePassword = document.getElementById('hide__password');
 
 loginBtn.addEventListener('mousedown', (e) => {
     loginBtn.style.scale = 0.95
@@ -36,3 +38,19 @@ if (window.location.href.split('/')[3].includes("error=true")) {
 } else {
     emptyPassword.style.opacity = 0;
 }
+
+showPassword.addEventListener('click', (e) => {
+    if (inputPassword.type === 'password') {
+        inputPassword.type = 'text';
+        showPassword.hidden = true
+        hidePassword.hidden = false
+    }
+})
+
+hidePassword.addEventListener('click', (e) => {
+    if (inputPassword.type === 'text') {
+        inputPassword.type = 'password'
+        showPassword.hidden = false
+        hidePassword.hidden = true
+    }
+})

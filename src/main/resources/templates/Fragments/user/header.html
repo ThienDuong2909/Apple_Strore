@@ -1,15 +1,66 @@
  <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{Layouts/user-main.html}">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/assets/css/user/header.css}">
+
+    <link
+            rel="stylesheet"
+            data-purpose="Layout StyleSheet"
+            title="Web Awesome"
+            href="/css/app-wa-a60ddbceb7292f11c9e430d067b1eb9f.css?vsn=d"
+    >
+
+    <link
+            rel="stylesheet"
+            href="https://site-assets.fontawesome.com/releases/v6.5.2/css/all.css"
+    >
+
+    <link
+            rel="stylesheet"
+            href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-thin.css"
+    >
+
+    <link
+            rel="stylesheet"
+            href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-solid.css"
+    >
+
+    <link
+            rel="stylesheet"
+            href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-regular.css"
+    >
+
+    <link
+            rel="stylesheet"
+            href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-light.css"
+    >
+
 </head>
 <body>
-    <h1>USER PAGE</h1>
-    <h1 th:text="${'Name is'+name}"></h1>
-<!--    <h1 th:text="${'UserName is'+username}"></h1>-->
-	<form th:action="@{/logout}" method="POST">
-    <button type="submit">Logout</button>
-	</form>
+<div th:fragment="header" id="wrapper__header" >
+    <div class="wrap-header">
+        <div class="logo">
+            <img th:src="@{/images/logologoAppleWorld.png}" alt="logo">
+        </div>
+        <div class="right-header">
+            <div class="search-wrap">
+                <form th:action="@{/user/search}" method="get" id="search-form">
+                    <input class="search-input" name="search" type="text" placeholder="Tìm kiếm...">
+                </form>
+<!--                <input type="text" class="search-input">-->
+                <i class="fa-solid fa-magnifying-glass icon search-icon"></i>
+            </div>
+            <i class="fa-regular fa-cart-shopping icon cart-icon" style="color: #ffffff;"></i>
+            <i class="fa-regular fa-circle-user icon avatar-icon" style="color: #ffffff;"></i>
+        </div>
+    </div>
+
+
+</div>
 </body>
 </html>

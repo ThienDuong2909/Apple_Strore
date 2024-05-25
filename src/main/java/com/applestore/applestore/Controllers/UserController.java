@@ -3,12 +3,13 @@ package com.applestore.applestore.Controllers;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 
 import com.applestore.applestore.Entities.UserEntity;
-import com.applestore.applestore.Security.Oauth2.CustomOAuth2User;
 import com.applestore.applestore.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -17,7 +18,6 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.applestore.applestore.DTOs.CustomerDto;
 import com.applestore.applestore.DTOs.OrderDto;
@@ -26,14 +26,11 @@ import com.applestore.applestore.DTOs.detailOrderDto;
 import com.applestore.applestore.Entities.Customer;
 import com.applestore.applestore.Entities.Order;
 import com.applestore.applestore.Entities.Product;
-import com.applestore.applestore.Repositories.ProductRepository;
 import com.applestore.applestore.Security.CustomUserDetails;
 import com.applestore.applestore.Services.CustomerService;
 import com.applestore.applestore.Services.OrderService;
 import com.applestore.applestore.Services.ProductService;
 
-
-import lombok.Data;
 
 import org.springframework.security.core.Authentication;
 
@@ -66,14 +63,14 @@ public class UserController {
         return userService.findByGmail(gmail);
     }
 	
-	@GetMapping("/")
-    public String index(Model model){
-        UserEntity user = curUser();
-//
-        model.addAttribute("name", user.getGmail()+user.getL_name()+user.getF_name());
-//        model.addAttribute("username",k.getUsername());
-        return "/Fragments/user/header";
-    }
+//	@GetMapping("/")
+//    public String index(Model model){
+//        UserEntity user = curUser();
+////
+//        model.addAttribute("name", user.getGmail()+user.getL_name()+user.getF_name());
+////        model.addAttribute("username",k.getUsername());
+//        return "/Fragments/user/header";
+//    }
 	
 	
     @GetMapping("/customer_info")
@@ -163,7 +160,16 @@ public class UserController {
     }
 
 	
-    @GetMapping("products")
+    @GetMapping("/")
+    public String index(Model model){
+        List<ProductDto> listAllProduct = productService.listALlProduct();
+        if(listAllProduct.size() > 20){
+            listAllProduct = listAllProduct.subList(0, 20);
+        }
+        model.addAttribute("listAllProduct", listAllProduct);
+    	return "/Fragments/user/index";
+    }
+    @GetMapping("/products")
     public String products(Model model, @Param("search") String search, @Param("comboBox") String price, @Param("color") String color){
 
         List<ProductDto> listAllProduct = new ArrayList<>();
@@ -195,10 +201,39 @@ public class UserController {
         System.out.println("SelectedItem: " + price);
         System.out.println("SelectedColor: " + color);
 
-    	return "/Fragments/user/products";
+        return "/Fragments/user/view-all-product";
     }
-    
-    
+
+    @GetMapping("/search")
+    public String searchProd(Model model, @Param("search") String search, @Param("comboBox") String price, @Param("color") String color){
+        List<ProductDto> resultSearchList = productService.listALlProduct();
+        List<String> listColor = productService.getAllColor();
+        if (search != null && !search.isEmpty()){
+            System.out.println("Search result: ");
+            resultSearchList = resultSearchList.stream().filter((x)-> x.getName().toLowerCase().contains(search.toLowerCase())).collect(Collectors.toList());
+        }
+
+        if (color != null && !color.isEmpty()) {
+            resultSearchList = resultSearchList.stream()
+                    .filter(product -> product.getColor().equalsIgnoreCase(color))
+                    .collect(Collectors.toList());
+        }
+
+        if (price != null && (price.equalsIgnoreCase("asc") || price.equalsIgnoreCase("desc"))) {
+            if (price.equalsIgnoreCase("asc")) {
+                resultSearchList.sort(Comparator.comparingInt(ProductDto::getIntPrice));
+            } else if (price.equalsIgnoreCase("desc")) {
+                resultSearchList.sort(Comparator.comparingInt(ProductDto::getIntPrice).reversed());
+            }
+        }
+        model.addAttribute("resultSearchList", resultSearchList);
+        model.addAttribute("listColor", listColor);
+
+        model.addAttribute("searchKey", search);
+        return "/Fragments/user/search-prod";
+
+    }
+
     @GetMapping("/product_detail")
     public String product_detail(@RequestParam("product_id") int productId,
     		Authentication authentication,
@@ -217,7 +252,7 @@ public class UserController {
         model.addAttribute("productDto", productDto);
         model.addAttribute("customerDto", customerDto);
 
-        return "/Fragments/user/Product_detail";
+        return "/Fragments/user/product_detail";
     }
     
     
@@ -228,7 +263,6 @@ public class UserController {
     		@RequestParam("product_id") int product_id,
             Authentication authentication,
             Model model
-    		
     ) {	
 //    	CustomUserDetails u = (CustomUserDetails) authentication.getPrincipal();
         UserEntity user = curUser();
@@ -275,12 +309,4 @@ public class UserController {
         
         return "/Fragments/user/purchase_history";
     }
-    
-    
-      
-
- 
-    
-    
-
 }

@@ -69,6 +69,11 @@
         </div>
 
         <div class="addNewDiv">
+            <div id="rollback-wrapper">
+                <a th:href="@{/admin/viewAll}" id="reload-form">
+                    <i class="far fa-sync-alt" id="reload-icon"></i>
+                </a>
+            </div>
             <button class="addNewBtn" onclick="openEditModal(addNewFormWrapper)">
                 <i class="far fa-plus-circle" ></i>
                 <label class="addNewLabel">Thêm mới</label>
@@ -76,13 +81,6 @@
         </div>
 
         <div id="tableArea">
-            <div id="rollback-wrapper">
-               <form th:action="@{/admin/viewAll}" id="reload-form">
-                   <button type="button" id="rollback-btn">
-                       <i class="far fa-sync-alt" id="reload-icon"></i>
-                   </button>
-               </form>
-            </div>
             <div class="tableWrapper">
                 <table class="productTable">
                     <tr class="table-header">

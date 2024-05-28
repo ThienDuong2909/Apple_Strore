@@ -24,6 +24,7 @@ input, textarea {
 
 button {
     cursor: pointer;
+    transition: all 0.1s linear;
 }
 
 select, label {
@@ -31,9 +32,10 @@ select, label {
 }
 
 .header {
-    position: sticky;
-    top: -30px;
-    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
 }
 
 .listProductTitle {
@@ -41,6 +43,7 @@ select, label {
     align-items: center;
     padding: 50px 20px;
     background-color: #E6E6E6FF;
+    margin-top: 60px;
 }
 
 h1 {
@@ -48,9 +51,9 @@ h1 {
 }
 
 .funtionsBar {
-    margin: -25px 20px 10px 20px;
     display: flex;
     flex-direction: row;
+    margin-left: 20px;
 }
 
 .sort {
@@ -144,44 +147,69 @@ h1 {
 }
 
 .addNewDiv {
-    position: sticky;
-    top: 108px;
     width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
-    float: right;
-    z-index: 2;
+    margin-top: 10px;
 }
 
 .addNewBtn {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    width: 140px;
-    height: 50px;
+    justify-content: space-around;
     border-bottom-left-radius: 50px;
     border-top-left-radius: 50px;
     background-color: #EEEEEE;
     transition: all 0.2s ease-in-out;
     border: 2px solid #dddddd;
+    gap: 4px;
+}
+
+.addNewBtn:hover {
+    scale: 1.02;
+    opacity: 0.95;
+    box-shadow: none;
 }
 
 .addNewBtn > i {
     color: black;
     font-size: 35px;
-    padding-left: 8px;
+    padding: 5px;
 }
 
 .addNewLabel {
     font-size: 16px;
-    margin-right: 10px;
     color: #232323;
-    font-weight: bold
+    font-weight: bold;
+    padding-right: 8px;
+}
+
+#rollback-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background-color: #EEEEEE;
+    border-radius: 50px;
+    margin-left: 20px;
+    transition: all 0.2s linear;
+}
+
+#rollback-wrapper:hover {
+    scale: 1.05;
+    opacity: 0.95;
+}
+
+
+#reload-icon {
+    color: black;
+    font-size: 20px;
+    font-weight: 500;
 }
 
 .tableWrapper {
-    margin-top: 85px;
+    margin-top: 10px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -209,48 +237,13 @@ h1 {
 .table-header > th{
     background-color: #f3f3f3;
     border: none;
-    text-wrap: none;
+    text-wrap: nowrap;
     font-weight: bold;
     text-align: center;
     height: 50px;
     color: #505050;
 }
 
-#rollback-wrapper{
-    position: absolute;
-    z-index: 2;
-    height: 35px;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    margin-top: -40px;
-}
-
-
-#rollback-btn {
-    width: 50px;
-    height: 35px;
-    border-radius: 40px;
-    outline: none;
-    margin-left: 10px;
-    margin-bottom: 10px;
-    background-color: #EEEEEE;
-    transition: all 0.2s ease-in-out;
-    border: 2px solid #dddddd;
-}
-
-#rollback-btn > a {
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-}
-
-#reload-icon {
-    color: black;
-    font-size: 20px;
-    padding: 5px 0;
-    font-weight: 500;
-}
 .handleWrapper {
     display: flex;
     flex-wrap: nowrap;
@@ -291,16 +284,14 @@ tr {
     width: 100%;
     height: 100%;
     position: absolute;
-    z-index: 10;
+    z-index: 5;
     display: none;
 }
 
 #edit-form-wrapper {
     position: fixed;
     display: flex;
-    width: 500px;
-    height: 450px;
-    background-color: #ededed;
+    background-color: #ffffff;
     justify-content: center;
     align-items: center;
     border-radius: 20px;
@@ -312,24 +303,18 @@ tr {
                 transform 200ms ease-in-out 0ms;
 }
 
-#edit-form-wrapper.active {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-    transition: top 0ms ease-in-out 200ms,
-                opacity 200ms ease-in-out 0ms,
-                transform 200ms ease-in-out 0ms;
-}
 
 #editForm {
     padding: 20px;
-    height: 92%;
-    width: 93%;
-    background-color: #cfcfcf;
+    height: 100%;
+    width: 100%;
+    background-color: #ffffff;
     display: flex;
+    border: 2px solid black;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 10px;
+    border-radius: 20px;
     box-shadow: 2px -2px 15px rgba(0, 0, 0, 0.3);
 }
 
@@ -358,7 +343,7 @@ tr {
 .form-control {
     height: 35px;
     border-radius: 10px;
-    border-style: none;
+    border: 2px solid black;
     outline: #032D3C;
     width: 200px;
     padding: 10px;
@@ -388,7 +373,7 @@ tr {
 }
 
 .wrapper-button > .btn-second {
-    background-color: white;
+    background-color: #e6e6e6;
 }
 
 .wrapper-button > .btn-primary {
@@ -407,12 +392,13 @@ textarea {
 
 button:active {
     box-shadow: none;
-    transform: scale(0.90);
+    scale: 0.95;
 }
 
 button:hover, .upload-btn:hover {
     box-shadow: 0 0 5px #B4B4B8,
     0 0 5px #B4B4B8;
+    scale: 1.02;
 }
 
 /*ADD NEW FORM PRODUCT*/
@@ -439,9 +425,7 @@ button:hover, .upload-btn:hover {
 }
 
 .adding-form-wrapper {
-    width: 490px;
-    height: 540px;
-    background-color: #ededed;
+    background-color: #ffffff;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -452,25 +436,21 @@ button:hover, .upload-btn:hover {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
+    border: 2px solid #000000
 }
 
 .add-new-form {
-    width: 450px;
-    height: 500px;
-    background-color: #cfcfcf;
+    background-color: #ffffff;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    box-shadow: 2px -2px 15px rgba(0, 0, 0, 0.3);
-
 }
 
 .header-wrapper {
     width: 100%;
-    background-color: #cfcfcf;
+    background-color: #ffffff;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(4, auto);
@@ -497,12 +477,12 @@ button:hover, .upload-btn:hover {
 }
 
 .footer-wrapper > .btn-primary {
-    background-color: #032D3C;
+    background-color: #191919;
     color: white;
 }
 
 .footer-wrapper > .btn-second {
-    background-color: white;
+    background-color: #dadada;
 }
 
 .wrapper-name, .wrapper-price, .wrapper-color, .wrapper-stock, .wrapper-image, .wrapper-description {
@@ -516,7 +496,7 @@ button:hover, .upload-btn:hover {
     height: 35px;
     border-radius: 10px;
     outline-color: #032D3C;
-    border-style: none;
+    border: 2px solid black;
     margin-top: 5px;
     padding: 10px;
     font-size: 16px;
@@ -610,14 +590,14 @@ button:hover, .upload-btn:hover {
     width: 100%;
     height: 100%;
     position: absolute;
-    z-index: 10;
+    z-index: 5;
     display: none;
     text-align: center;
 }
 
 .confirm-form-wrapper {
-    width: 340px;
-    background-color: #ededed;
+    background-color: #ffffff;
+    width: 350px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -628,11 +608,11 @@ button:hover, .upload-btn:hover {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 10px;
+    border: 2px solid #000000;
 }
 
 #confirm-form {
-    background-color: #cfcfcf;
+    background-color: #ffffff;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -665,6 +645,7 @@ button:hover, .upload-btn:hover {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    padding-bottom: 10px;
 }
 
 #footer-wrapper > button {
@@ -681,3 +662,12 @@ button:hover, .upload-btn:hover {
     background-color: #f35555;
     color: white;
 }
+
+#no-btn {
+    background-color: #a5a5a5;
+    color: white;
+}
+
+
+
+

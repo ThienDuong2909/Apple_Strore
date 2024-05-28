@@ -115,7 +115,7 @@ public class AuthController {
         helper.setFrom("addmmin4567@gmail.com", "AppleWorld");
         helper.setTo(gmail);
         String subject = "Đặt lại mật khẩu";
-        String content = "<p>AppleWorld xin chào, </p>"
+        String content = "<p>AppleWorld xin chào</p>"
                 +"<p>Chúng tôi nhận được yêu cầu đặt lại mật khẩu từ bạn.</p>"
                 +"<p>Vui lòng bấm vào liên kết bên dưới để tiến hành đặt lại mật khẩu.</p>"
                 +"<p><b><a href=\""+rspwLink + "\">Đặt lại mật khẩu<a/></b></p>"
@@ -157,6 +157,6 @@ public class AuthController {
             userService.updatePassword(userEntity, newPassword);
             model.addAttribute("message", "You have successfully changed your password");
         }
-        return "/Fragments/auth/message";
+        return "/Fragments/auth/login";
     }
 }

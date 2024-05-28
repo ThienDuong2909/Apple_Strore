@@ -23,20 +23,63 @@
                 <img th:src="@{../../images/logologoAppleWorld.png}" style="height: 40px">
             </div>
             <div id="wrapper__manage">
-                <div id="wrapper__manage__product" class="manage__item">
-                    <h3 class="manage__name" id="manage__product">Sản phẩm</h3>
-                </div>
-                <div id="wrapper__manage__order" class="manage__item">
-                    <h3 class="manage__name" id="manage__order">Đơn hàng</h3>
-                </div>
+                <a th:href="viewAll" class="link__to__view">
+                    <div id="wrapper__manage__product" class="manage__item">
+                        <h3 class="manage__name" id="manage__product">Sản phẩm</h3>
+                    </div>
+                </a>
+                <a th:href="viewAllOrder" class="link__to__view">
+                    <div id="wrapper__manage__order" class="manage__item">
+                        <div id="content">
+                            <h3 class="manage__name" id="manage__order">Đơn hàng</h3>
+                        </div>
+                        <div id="dropdown__list">
+                            <i class="fas fa-caret-down" id="dropdown__icon"></i>
+                            <div id="wrapper__dropdown">
+                                <a class="dropdown__item" th:href="notApproved">
+                                    <div>
+                                        Đơn hàng chờ duyệt
+                                    </div>
+                                </a>
+                                <a class="dropdown__item" th:href="isApproved">
+                                    <div>
+                                        Đơn hàng đã duyệt
+                                    </div>
+                                </a>
+                                <a class="dropdown__item" th:href="delivered">
+                                    <div>
+                                        Đơn hàng đã giao
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
             </div>
         </div>
 
-        <form th:action="@{/logout}" method="POST" id="logout__form">
-            <button type="submit" id="logout__btn">
+        <div id="logout__background">
+            <div id="wrapper__logout__btn">
                 <i class="fas fa-sign-out-alt" id="logout__icon"></i>
-            </button>
-        </form>
+            </div>
+            <div id="outside__logout__form">
+                <form th:action="@{/logout}" method="POST" id="logout__form">
+                    <div>
+                        <h4 id="title__logout">Xác nhận</h4>
+                    </div>
+                    <div>
+                        <p id="content__logout">Bạn có chắc chắn muốn đăng xuất?</p>
+                    </div>
+                    <div id="handle">
+                        <button type="button" id="cancel__logout__btn">Hủy</button>
+                        <button type="submit" id="confirm__logout__btn">Có</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
     </div>
     <script th:src="@{/JS/header.js}"></script>
 </body>

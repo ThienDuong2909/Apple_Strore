@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -114,8 +115,21 @@ public class AdminController {
 
     @GetMapping("delete/id={id}")
     public String deleteProduct(@PathVariable("id") Integer id) {
-        productService.deleteProduct(id);
-        return "redirect:/admin/viewAll";
+        // kiem tra xem co
+        boolean isDuplicate = true;
+        for (int i = 0; i < orderService.getStatusOrder(1).size(); i++) {
+            if (orderService.getStatusOrder(1).get(i).getProduct_id() == id){
+                isDuplicate = false;
+                break;
+            }
+        }
+        if (isDuplicate) {
+            productService.deleteProduct(id);
+            return "redirect:/admin/viewAll";
+        } else {
+            return "redirect:/admin/viewAll";
+        }
+
     }
 
     // -------------------- MANAGEMENT ORDER ---------------------------------------------

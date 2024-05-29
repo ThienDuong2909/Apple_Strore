@@ -9,7 +9,7 @@ import lombok.*;
 @Getter
 @Setter
 public class detailOrderDto {
-    private int order_id;
+    private int order_id, product_id;
     private String price, product_name, product_color, customer_l_name, customer_f_name, address_line, city, country, order_date, phone, img, status;
 
     public int getIntPrice() {

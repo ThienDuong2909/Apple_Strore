@@ -43,12 +43,12 @@
         </div>
     </div>
     <div class="wrap">
-        <div class="history-container">
-            <div class="history-header">
+        <div class="order-container">
+            <div class="order-header">
                 <h1>Danh sách đơn hàng</h1>
             </div>
-            <div class="history-list">
-                <div th:each="listDetailOrder : ${listDetailOrder}" class="history-item">
+            <div class="order-list">
+                <div th:each="listDetailOrder : ${listDetailOrder}" class="order-item">
                     <img style="max-width:100%;" th:src="'data:image/jpeg;base64,' + ${listDetailOrder.getImg()}" alt="Sản phẩm">
                     <div>
                         <h2>Đơn hàng #<span th:text="${listDetailOrder.getOrder_id()}"></span></h2>
@@ -62,7 +62,7 @@
                     
                 </div>
             </div>
-            <div class="history-footer">
+            <div class="order-footer">
                 <button onclick="goBack()" class="back-button">Quay lại</button>
             </div>
         </div>

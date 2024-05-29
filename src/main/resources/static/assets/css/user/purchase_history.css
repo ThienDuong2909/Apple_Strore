@@ -8,7 +8,7 @@
             justify-content: center;
             position: relative;
         }
-        .history-container {
+        .order-container {
             background-color: #fff;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             border-radius: 15px;
@@ -19,23 +19,23 @@
             display: flex;
             flex-direction: column;
         }
-        .history-header {
+        .order-header {
             background-color: #000;
             color: #fff;
             padding: 20px;
             text-align: center;
             white-space: nowrap; /* Ngăn chữ xuống dòng */
         }
-        .history-header h1 {
+        .order-header h1 {
             margin: 0;
             font-size: 32px;
         }
-        .history-list {
+        .order-list {
             padding: 20px;
             overflow-y: auto;
             flex-grow: 1;
         }
-        .history-item {
+        .order-item {
             background-color: #f8f9fa;
             border-radius: 5px;
             padding: 20px;
@@ -44,19 +44,19 @@
             align-items: center;
             position: relative;
         }
-        .history-item img {
+        .order-item img {
             width: 130px;
             height: 150px;
             border-radius: 5px;
             object-fit: cover;
             margin-right: 20px;
         }
-        .history-item h2 {
+        .order-item h2 {
             margin-top: 0;
             font-size: 24px;
             color: #333;
         }
-        .history-item p {
+        .order-item p {
             margin: 5px 0;
             font-size: 18px;
             color: #555;
@@ -68,7 +68,7 @@
             cursor: pointer;
             color: #e74c3c;
         }
-        .history-footer {
+        .order-footer {
             display: flex;
             justify-content: left;
             padding: 40px ;

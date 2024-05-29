@@ -1,4 +1,4 @@
-        .wrap-prod {
+        .wrap {
             display: flex;
             flex-wrap: wrap;
             border: #fff 2px solid;

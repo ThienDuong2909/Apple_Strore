@@ -1,6 +1,7 @@
 package com.applestore.applestore.Controllers;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -80,55 +81,31 @@ public class UserController {
         UserEntity user = curUser();
     	CustomerDto customerDto = new CustomerDto();
 		customerDto = customerService.getCustomerByuserId(user.getUser_id());
+		
+		List<CustomerDto> CustomerDtos = customerService.list_CustomerDto();
+		List<String> ds_SDT = new ArrayList<String>();
+		String tmp = null;
+		if(customerDto != null) {
+			tmp = customerDto.getPhone();
+		}
+		
+		for(CustomerDto ctmDto : CustomerDtos) {
+			
+			if(ctmDto.getPhone().equals(tmp)) {
+				
+			}else {
+				ds_SDT.add(ctmDto.getPhone());
+			}
+			
+			
+			
+		}
+		
+		model.addAttribute("ds_SDT", ds_SDT);
 		model.addAttribute("customerDto", customerDto);
     	model.addAttribute("user", user);
     	
         return "/Fragments/user/customer_info";
-    }
-    
-    @GetMapping("/edit")
-    public String Edit(Model model,Authentication authentication) {
-//    	CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
-        UserEntity user = curUser();
-    	CustomerDto customerDto = new CustomerDto();
-		customerDto = customerService.getCustomerByuserId(user.getUser_id());
-		model.addAttribute("customerDto", customerDto);
-    	
-        return "/Fragments/user/Edit";
-    }
-    
-    @PostMapping("/update")
-    public String update(
-            @RequestParam("address_line") String address_line,
-            @RequestParam("country") String country,
-            @RequestParam("city") String city,
-            @RequestParam("phone") String phone,
-            Authentication authentication,
-            Model model
-    ){  
-//        CustomUserDetails u = (CustomUserDetails) authentication.getPrincipal();
-        UserEntity user = curUser();
-        CustomerDto customerDto = customerService.getCustomerByuserId(user.getUser_id());
-        Customer customer = customerService.getCustomerById1(customerDto.getCustomer_id());
-        customer.setAddress_line(address_line);
-        customer.setCountry(country);
-        customer.setCity(city);
-        customer.setPhone(phone);
-        customerService.saveCustomer(customer);
-        
-        
-        model.addAttribute("customerDto", customer);
-        model.addAttribute("user", user);
-        
-        return "/Fragments/user/customer_info";
-    }
-    
-    
-	
-    
-    @GetMapping("/enter_customer_info")
-    public String EnterCustomerInfo() {
-        return "/Fragments/user/enter_customer_info";
     }
     
     @PostMapping("/save")
@@ -156,9 +133,42 @@ public class UserController {
         model.addAttribute("customerDto", customerDto);
         model.addAttribute("user", user);
 
-        return "/Fragments/user/customer_info";
+        return "redirect:/user/customer_info";
     }
 
+    
+    
+    @PostMapping("/update")
+    public String update(
+            @RequestParam("address_line") String address_line,
+            @RequestParam("country") String country,
+            @RequestParam("city") String city,
+            @RequestParam("phone") String phone,
+            Authentication authentication,
+            Model model
+    ){  
+//        CustomUserDetails u = (CustomUserDetails) authentication.getPrincipal();
+        UserEntity user = curUser();
+        CustomerDto customerDto = customerService.getCustomerByuserId(user.getUser_id());
+        Customer customer = customerService.getCustomerById1(customerDto.getCustomer_id());
+        customer.setAddress_line(address_line);
+        customer.setCountry(country);
+        customer.setCity(city);
+        customer.setPhone(phone);
+        customerService.saveCustomer(customer);
+        
+        
+        
+        
+        return "redirect:/user/customer_info";
+    }
+    
+    
+	
+    
+    
+    
+    
 	
     @GetMapping("/")
     public String index(Model model){
@@ -258,7 +268,7 @@ public class UserController {
     
 
     
-    @GetMapping("/checkout")
+    @PostMapping("/checkout")
     public String checkout(
     		@RequestParam("product_id") int product_id,
             Authentication authentication,
@@ -269,19 +279,20 @@ public class UserController {
 		CustomerDto customerDto = new CustomerDto();
 		customerDto = customerService.getCustomerByuserId(user.getUser_id());
 		
-		LocalDate currentDate = LocalDate.now();
-	    String formattedDate = currentDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		LocalDateTime currentDateTime = LocalDateTime.now();
+        String formattedDateTime = currentDateTime.format(DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy"));
 	   
 	    
 		OrderDto orderDto = new OrderDto();
 		orderDto.setCustomer_id(customerDto.getCustomer_id());
 		orderDto.setProduct_id(product_id);
-		orderDto.setOrder_date(formattedDate);
+		orderDto.setOrder_date(formattedDateTime);
 		orderDto.setStatus(0);
 		Order order = orderService.convertDtoToEntity(orderDto);
-		orderService.saveOrder(order);
+		orderService.saveOrder(order);	
 		
-		Product product = productService.getProductById(product_id);     
+		Product product = productService.getProductById(product_id); 
+		ProductDto productDto = productService.convertProductToDto(product);
         String tmp = product.getStock();
         int tmp1 = Integer.parseInt(tmp);
 		product.setStock(String.valueOf(tmp1-1));
@@ -289,23 +300,21 @@ public class UserController {
 		
 		
 		
-        return "/Fragments/user/checkout";
+		return "redirect:/user/products";
     }
     
     @GetMapping("/purchase_history")
-    public String purchaseHistory(
-    		Authentication authentication,
-    		Model model){
-//    	CustomUserDetails u = (CustomUserDetails) authentication.getPrincipal();
+    public String purchaseHistory(Model model, @Param("Time") String Time, @Param("Status") String Status ){
+
         UserEntity user = curUser();
 		CustomerDto customerDto = new CustomerDto();
 		customerDto = customerService.getCustomerByuserId(user.getUser_id());
 		
-		List<detailOrderDto> listOrder1 = new ArrayList<>();
-		listOrder1 = orderService.getDetailOrderByCustomerId(customerDto.getCustomer_id());
+		List<detailOrderDto> listOrder = new ArrayList<>();
+		listOrder = orderService.getDetailOrderByCustomerId(customerDto.getCustomer_id(),Time, Status );
+				
 		
-		
-        model.addAttribute("listDetailOrder",listOrder1 );
+        model.addAttribute("listDetailOrder",listOrder );
         
         return "/Fragments/user/purchase_history";
     }

@@ -1,0 +1,179 @@
+        .wrap-prod {
+            display: flex;
+            flex-wrap: wrap;
+            border: #fff 2px solid;
+            border-radius: 10px;
+            margin: 20px 350px;
+            background-color: #fff;
+            justify-content: center;
+            position: relative;
+        }
+        .history-container {
+            background-color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            width: 800px;
+            max-width: 100%;
+            max-height: 120vh; /* Đặt chiều cao tối đa cho container */
+            display: flex;
+            flex-direction: column;
+        }
+        .history-header {
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            white-space: nowrap; /* Ngăn chữ xuống dòng */
+        }
+        .history-header h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+        .history-list {
+            padding: 20px;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+        .history-item {
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        .history-item img {
+            width: 130px;
+            height: 150px;
+            border-radius: 5px;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+        .history-item h2 {
+            margin-top: 0;
+            font-size: 24px;
+            color: #333;
+        }
+        .history-item p {
+            margin: 5px 0;
+            font-size: 18px;
+            color: #555;
+        }
+        .delete-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            color: #e74c3c;
+        }
+        .history-footer {
+            display: flex;
+            justify-content: left;
+            padding: 40px ;
+        }
+        .back-button {
+            background-color: #6c757d;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .back-button:hover {
+            background-color: #5a6268;
+        }
+        
+        .wrap-tools {
+            display: flex;
+            flex-wrap: wrap;
+            border: #fff 2px solid;
+            border-radius: 10px;
+            margin: 20px;
+            background-color: #fff;
+            justify-content: left;
+            position: relative;
+        }
+        
+        .toolbar {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+        }
+        .funtionsBar {
+            margin-top: 20px;
+            margin-left: 100px;
+            display: flex;
+            flex-direction: row;
+            float: left;
+        }
+        
+        .sort {
+            display: flex;
+            flex-wrap: nowrap;
+            background-color: #EEEEEE;
+            white-space: nowrap;
+            justify-content: space-evenly;
+            align-items: center;
+            width: 240px;
+            height: 50px;
+            border-radius: 50px;
+            overflow: unset;
+            margin-right: 20px;
+            border: 2px solid #dddddd;
+            padding-left: 10px;
+        }
+        
+        #comboBox {
+            padding: 10px 5px;
+            border-radius: 50px;
+            outline-color: #032D3C;
+            border-style: none;
+        }
+        
+        .filterStatus {
+            display: flex;
+            background-color: #eeeeee;
+            align-items: center;
+            justify-content: center;
+            width: 310px;
+            height: 50px;
+            border-radius: 50px;
+            border: 2px solid #dddddd;
+        }
+        
+        .StatusComboBoxLabel {
+            margin-left: 10px;
+        }
+        
+        .StatusComboBoxForm {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            align-items: center;
+            white-space: nowrap;
+            overflow: initial;
+            width: 100%;
+        }
+        
+        #StatusComboBox {
+            padding: 10px 10px;
+            border-radius: 50px;
+            outline-color: #032D3C;
+            border-style: none;
+            width: 110px;
+        }
+        
+        .filterStatusBtn {
+            width: 60px;
+            height: 35px;
+            margin-right: 10px;
+            border-radius: 50px;
+            outline: none;
+            border-style: none;
+            background-color: #000000;
+        }
+            

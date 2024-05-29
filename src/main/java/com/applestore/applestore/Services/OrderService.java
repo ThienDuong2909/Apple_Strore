@@ -7,7 +7,11 @@ import com.applestore.applestore.Repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -113,32 +117,120 @@ public class OrderService {
     }
     
     //lấy thông tin đơn hàng bằng id khách hàng
-    public List<OrderDto> getOrderByCustomerId(int customer_id){
+    public List<OrderDto> getOrderByCustomerId_ASC(int customer_id){
         List<OrderDto> listOrder = new ArrayList<>();
-        for (Order order : orderRepository.findByCustomerId(customer_id)){
-            listOrder.add(convertEntityToDto(order));
+        for (Order order : orderRepository.findByCustomerId_ASC(customer_id)){
+        	OrderDto orderDto = new OrderDto();
+        	orderDto.setOrder_id(order.getOrder_id());
+        	orderDto.setCustomer_id(order.getCustomer_id());
+        	orderDto.setProduct_id(order.getProduct_id());
+        	orderDto.setOrder_date(order.getOrder_date());
+        	orderDto.setStatus(order.getStatus());
+        	listOrder.add(orderDto);
         }
         
         return listOrder;
     }
     
-    public List<detailOrderDto> getDetailOrderByCustomerId(int customer_id){
-        List<detailOrderDto> listOrder = new ArrayList<>();
-        for (OrderDto orderDto : getOrderByCustomerId(customer_id)){
-            CustomerDto customer = customerService.getCustomerById(orderDto.getCustomer_id());
-            ProductDto product = productService.convertProductToDto(productService.getProductById(orderDto.getProduct_id()));
-            detailOrderDto detailOrder = new detailOrderDto();
-            detailOrder.setOrder_date(orderDto.getOrder_date());
-            detailOrder.setProduct_name(product.getName());
-            detailOrder.setProduct_color(product.getColor());
-            detailOrder.setPrice(product.getPrice());
-            detailOrder.setAddress_line(customer.getAddress_line());
-            detailOrder.setImg(product.getImg());
-            listOrder.add(detailOrder);
+    public List<OrderDto> getOrderByCustomerId_DESC(int customer_id){
+        List<OrderDto> listOrder = new ArrayList<>();
+        for (Order order : orderRepository.findByCustomerId_DESC(customer_id)){
+        	OrderDto orderDto = new OrderDto();
+        	orderDto.setOrder_id(order.getOrder_id());
+        	orderDto.setCustomer_id(order.getCustomer_id());
+        	orderDto.setProduct_id(order.getProduct_id());
+        	orderDto.setOrder_date(order.getOrder_date());
+        	orderDto.setStatus(order.getStatus());
+        	listOrder.add(orderDto);
         }
         
         return listOrder;
     }
+    
+    public List<detailOrderDto> getDetailOrderByCustomerId(int customer_id, String Time, String Status){
+        List<detailOrderDto> listOrder = new ArrayList<>();
+        
+        if( Time == null) {
+	        for (OrderDto orderDto : getOrderByCustomerId_DESC(customer_id)){
+	            CustomerDto customer = customerService.getCustomerById(orderDto.getCustomer_id());
+	            ProductDto product = productService.convertProductToDto(productService.getProductById(orderDto.getProduct_id()));
+	            detailOrderDto detailOrder = new detailOrderDto();
+	            detailOrder.setOrder_id(orderDto.getOrder_id());
+	            detailOrder.setOrder_date(orderDto.getOrder_date());
+	            detailOrder.setProduct_name(product.getName());
+	            detailOrder.setProduct_color(product.getColor());
+	            detailOrder.setPrice(product.getPrice());
+	            detailOrder.setAddress_line(customer.getAddress_line() + ", " + customer.getCity() + ", " + customer.getCountry());
+	            detailOrder.setImg(product.getImg());
+	            if(orderDto.getStatus() == 0) {
+	            	detailOrder.setStatus("Chưa giao hàng");
+	            }
+	            if(orderDto.getStatus() == 1) {
+	            	detailOrder.setStatus("Đã giao hàng");
+	            }
+	            
+	            listOrder.add(detailOrder);
+	        }
+        }else if(Time.equals("newest") || Time.equals("") ) {
+        	for (OrderDto orderDto : getOrderByCustomerId_DESC(customer_id)){
+	            CustomerDto customer = customerService.getCustomerById(orderDto.getCustomer_id());
+	            ProductDto product = productService.convertProductToDto(productService.getProductById(orderDto.getProduct_id()));
+	            detailOrderDto detailOrder = new detailOrderDto();
+	            detailOrder.setOrder_id(orderDto.getOrder_id());
+	            detailOrder.setOrder_date(orderDto.getOrder_date());
+	            detailOrder.setProduct_name(product.getName());
+	            detailOrder.setProduct_color(product.getColor());
+	            detailOrder.setPrice(product.getPrice());
+	            detailOrder.setAddress_line(customer.getAddress_line() + ", " + customer.getCity() + ", " + customer.getCountry());
+	            detailOrder.setImg(product.getImg());
+	            if(orderDto.getStatus() == 0) {
+	            	detailOrder.setStatus("Chưa giao hàng");
+	            }
+	            if(orderDto.getStatus() == 1) {
+	            	detailOrder.setStatus("Đã giao hàng");
+	            }
+	            
+	            listOrder.add(detailOrder);
+        	} 
+  	
+        }else {
+        	for (OrderDto orderDto : getOrderByCustomerId_ASC(customer_id)){
+	            CustomerDto customer = customerService.getCustomerById(orderDto.getCustomer_id());
+	            ProductDto product = productService.convertProductToDto(productService.getProductById(orderDto.getProduct_id()));
+	            detailOrderDto detailOrder = new detailOrderDto();
+	            detailOrder.setOrder_id(orderDto.getOrder_id());
+	            detailOrder.setOrder_date(orderDto.getOrder_date());
+	            detailOrder.setProduct_name(product.getName());
+	            detailOrder.setProduct_color(product.getColor());
+	            detailOrder.setPrice(product.getPrice());
+	            detailOrder.setAddress_line(customer.getAddress_line() + ", " + customer.getCity() + ", " + customer.getCountry());
+	            detailOrder.setImg(product.getImg());
+	            if(orderDto.getStatus() == 0) {
+	            	detailOrder.setStatus("Chưa giao hàng");
+	            }
+	            if(orderDto.getStatus() == 1) {
+	            	detailOrder.setStatus("Đã giao hàng");
+	            }
+	            
+	            listOrder.add(detailOrder);
+	        }
+        }
+        
+        if (Status != null && (Status.equals("Chưa giao hàng") || Status.equals("Đã giao hàng"))) {
+            List<detailOrderDto> filteredList = new ArrayList<>();
+            for (detailOrderDto detailOrder : listOrder) {
+                if (detailOrder.getStatus().equals(Status)) {
+                    filteredList.add(detailOrder);
+                }
+            }
+            return filteredList;
+        }
+        
+        return listOrder;
+    }
+    
+    
+    
 
 
     public void updateOrderStatus(int status, int orderId){

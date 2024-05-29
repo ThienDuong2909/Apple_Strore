@@ -45,7 +45,7 @@
     color: #0066CC;
 }
 .pro-detail-color{
-    display: block;
+   
     margin-bottom: 12px;
     margin-left: 10px;
 }
@@ -84,3 +84,24 @@
     flex-direction: column;
     background-color: #cccccc;
 }
+
+.info-box {
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.data-value {
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+.customer-info {
+    margin-top: 40px; /* Điều chỉnh khoảng cách giữa "Thông tin khách hàng" và dòng "Giá tiền" */
+}
+
+.customer-title {
+    margin-bottom: 20px; /* Điều chỉnh khoảng cách dưới của tiêu đề "Thông tin khách hàng" */
+}
+  	

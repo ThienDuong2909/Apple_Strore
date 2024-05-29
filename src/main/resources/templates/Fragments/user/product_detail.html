@@ -7,6 +7,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chi tiết sản phẩm</title>
+    
+    
     <link
             rel="stylesheet"
             data-purpose="Layout StyleSheet"
@@ -37,73 +39,105 @@
     <div class="wrap-prod-detail">
         <div class="product-detail-container">
             <div class="product-detail-wrap-image">
-<!--                <img style="max-width: 100%;" th:src="'data:image/jpeg;base64,' + ${productDto.img}"/>-->
-                <img th:src="@{/images/img_2.png}" alt="">
+                <img style="max-width:90%;" th:src="'data:image/jpeg;base64,' + ${productDto.img}"/>
+                <!--  <img th:src="@{/images/img_2.png}" alt="">-->
             </div>
             <div class="product-info">
                 <h1 th:text="${productDto.name}" class="pro-detail-name"></h1>
                 <span th:text="${productDto.price}" class="pro-detail-price"></span>
                 <hr>
-                <p>Màu sắc</p><span th:text="${productDto.color}" class="pro-detail-color"></span>
-                <p>Chi tiết</p><span th:text="${productDto.description}" class="pro-detail-descript"></span>
+                
+                <p><strong>Còn lại: </strong><span th:text="${productDto.stock}" class="pro-detail-stock"></span> (chiếc)</p>
+                <p><strong>Màu sắc:</strong><span th:text="${productDto.color}" class="pro-detail-color"></span></p>
+                <p><strong>Chi tiết: </strong><span th:text="${productDto.description}" class="pro-detail-descript"></span></p>
+                
                 <hr>
                 <div class="wrap-action-pro-detail-btn">
-                    <button class="buy-button"
-                            data-bs-toggle="modal" data-bs-target="#buy-modal">Mua hàng</button>
+                    <button class="buy-button" data-bs-toggle="modal" data-bs-target="#confirmation-modal">Mua hàng</button>
                     <button onclick="goBack()" class="back-button">Quay lại</button>
                 </div>
             </div>
         </div>
 
     </div>
+    
     <!-- Modal -->
-    <div class="modal fade" id="buy-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Thông tin người nhận</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form th:action="@{/user/save}" method="post" class="form-buy-info" >
-                        <label for="address_line">Địa chỉ nhận hàng:</label>
-                        <input type="text" id="address_line" name="address_line">
+	<div class="modal fade" id="confirmation-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <h1 class="modal-title" id="staticBackdropLabel">Xác nhận đơn hàng</h1>
+	                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	            </div>
+	            <div class="modal-body">
+	            <form th:action="@{/user/checkout}" method="post" >
+	                <div>
+	                    <h2>Thông tin sản phẩm</h2>
+	                    
+	                    <p><strong>Tên sản phẩm:</strong></p>
+	                    <div class="info-box">
+	                        <p id="productName" class="data-value"><span th:text="${productDto.name}"></span></p>
+	                    </div>
+	                    
+	                    <p><strong>Màu sắc:</strong></p>
+	                    <div class="info-box">
+	                        <p id="productColor" class="data-value"><span th:text="${productDto.color}"></span></p>
+	                    </div>
+	                    
+	                    <p><strong>Trị giá:</strong></p>
+	                    <div class="info-box">
+	                        <p id="productPrice" class="data-value"><span th:text="${productDto.price}"></span></p>
+	                    </div>
+	                    
+	                    <input type="hidden" th:value="${productDto.product_id}" id="product_id" name="product_id">
+	                </div>
+	                <div class="customer-info">
+	                    <h2 class="customer-title">Thông tin khách hàng</h2>
+	                    <div th:if="${customerDto != null}" class="customer-details">
+	                        <p><strong>Địa chỉ nhận hàng:</strong></p>
+	                        <div class="info-box">
+	                            <p id="customerAddress" class="data-value">
+	                                <span th:text="${customerDto.address_line}"></span>,
+	                                <span th:text="${customerDto.city}"></span>,
+	                                <span th:text="${customerDto.country}"></span>
+	                            </p>
+	                        </div>
+	                    
+	                        <p><strong>Số điện thoại:</strong></p>
+	                        <div class="info-box">
+	                            <p id="customerPhone" class="data-value"><span th:text="${customerDto.phone}"></span></p>
+	                        </div>
+	                        <div class="modal-footer">
+				                <button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="modal">Hủy</button>
+				                <button type="submit" class="btn btn-primary btn-lg">Mua hàng</button>
+			           	 	</div>
+	                    </div>
+	                    <div th:if="${customerDto == null}" class="customer-details">
+	                    	
+	                        <!-- Nút button chuyển đến trang customer_info -->
+	                        <a th:href="@{/user/customer_info}" class="btn btn-primary">Nhập thông tin khách hàng</a>
+	                        
+	                        <div class="modal-footer">
+	                        	<button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="modal">Hủy</button>
+	                        </div>
+	                    </div>
+	                </div>
+	                
+	                
+	            </form>    
+	            </div>
+	            
+	        </div>
+	    </div>
+	</div>
 
-                        <label for="country">Quốc gia:</label>
-                        <input type="text" id="country" name="country">
-
-                        <label for="city">Thành phố:</label>
-                        <input type="text" id="city" name="city">
-
-                        <label for="phone">Số điện thoại:</label>
-                        <input type="text" id="phone" name="phone">
-
-                        <button th:href="@{user/save}" type="submit" class="btn btn-primary">Thêm</button>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Understood</button>
-                </div>
-            </div>
-        </div>
-    </div>
+	    
+    
+    
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <script th:inline="javascript">
-        var customerDto = /*[[${customerDto}]]*/ null;
-        var product_id = /*[[${productDto.product_id}]]*/ null;
-
-        function checkCustomerInfo() {
-            var customerInfoExists = customerDto != null;
-
-            if (customerInfoExists) {
-                window.location.href = "/user/checkout?product_id=[[${productDto.product_id}]]";
-            } else {
-                window.location.href = "/user/enter_customer_info";
-            }
-        }
-
+        
         function goBack() {
             window.history.back();
         }

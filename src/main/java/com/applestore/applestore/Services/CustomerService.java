@@ -1,5 +1,6 @@
 package com.applestore.applestore.Services;
 
+
 import com.applestore.applestore.DTOs.CustomerDto;
 import com.applestore.applestore.DTOs.ProductDto;
 import com.applestore.applestore.Entities.Customer;
@@ -66,4 +67,22 @@ public class CustomerService {
     public void saveCustomer(Customer customer){
     	customerRepository.save(customer);
     }
+    
+    public List<CustomerDto> list_CustomerDto(){
+    	List<Customer> customers = customerRepository.findAll();
+    	List<CustomerDto> CustomerDtos = new ArrayList<>();
+        for (Customer customer : customers) {
+            CustomerDto customerDto = new CustomerDto();
+            customerDto.setUser_id(customer.getUser_id());
+            customerDto.setCustomer_id(customer.getCustomer_id());
+            customerDto.setAddress_line(customer.getAddress_line());
+            customerDto.setPhone(customer.getPhone());
+            customerDto.setCity(customer.getCity());
+            customerDto.setCountry(customer.getCountry());
+            CustomerDtos.add(customerDto);
+        }
+       
+        return CustomerDtos;
+    }
+
 }

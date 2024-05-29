@@ -25,6 +25,15 @@
                         <i class="far fa-check-circle" id="check__icon"></i>
                     </div>
                 </div>
+                <div th:if = "${param.fail}" class="fail__register">
+                    <a th:href="@{/login}" id="redirect__login__fail">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                    <div id="wrapper__content__notice__fail">
+                        Đăng kí thất bại, email đã tồn tại!
+                        <i class="far fa-times-circle" id="check__icon__fail"></i>
+                    </div>
+                </div>
                 <form method="POST" th:action="@{/register}" th:object="${user}" id="register__form">
                     <div class="each__field">
                         <label>Họ và tên lót</label>

@@ -163,9 +163,12 @@ public class OrderService {
 	            detailOrder.setAddress_line(customer.getAddress_line() + ", " + customer.getCity() + ", " + customer.getCountry());
 	            detailOrder.setImg(product.getImg());
 	            if(orderDto.getStatus() == 0) {
-	            	detailOrder.setStatus("Chưa giao hàng");
+	            	detailOrder.setStatus("Chờ xét duyệt");
 	            }
 	            if(orderDto.getStatus() == 1) {
+	            	detailOrder.setStatus("Đã xét duyệt");
+	            }
+	            if(orderDto.getStatus() == 2) {
 	            	detailOrder.setStatus("Đã giao hàng");
 	            }
 	            
@@ -184,9 +187,12 @@ public class OrderService {
 	            detailOrder.setAddress_line(customer.getAddress_line() + ", " + customer.getCity() + ", " + customer.getCountry());
 	            detailOrder.setImg(product.getImg());
 	            if(orderDto.getStatus() == 0) {
-	            	detailOrder.setStatus("Chưa giao hàng");
+	            	detailOrder.setStatus("Chờ xét duyệt");
 	            }
 	            if(orderDto.getStatus() == 1) {
+	            	detailOrder.setStatus("Đã xét duyệt");
+	            }
+	            if(orderDto.getStatus() == 2) {
 	            	detailOrder.setStatus("Đã giao hàng");
 	            }
 	            
@@ -206,9 +212,12 @@ public class OrderService {
 	            detailOrder.setAddress_line(customer.getAddress_line() + ", " + customer.getCity() + ", " + customer.getCountry());
 	            detailOrder.setImg(product.getImg());
 	            if(orderDto.getStatus() == 0) {
-	            	detailOrder.setStatus("Chưa giao hàng");
+	            	detailOrder.setStatus("Chờ xét duyệt");
 	            }
 	            if(orderDto.getStatus() == 1) {
+	            	detailOrder.setStatus("Đã xét duyệt");
+	            }
+	            if(orderDto.getStatus() == 2) {
 	            	detailOrder.setStatus("Đã giao hàng");
 	            }
 	            
@@ -216,7 +225,7 @@ public class OrderService {
 	        }
         }
         
-        if (Status != null && (Status.equals("Chưa giao hàng") || Status.equals("Đã giao hàng"))) {
+        if (Status != null && (Status.equals("Chờ xét duyệt") || Status.equals("Đã xét duyệt") || Status.equals("Đã giao hàng"))) {
             List<detailOrderDto> filteredList = new ArrayList<>();
             for (detailOrderDto detailOrder : listOrder) {
                 if (detailOrder.getStatus().equals(Status)) {
@@ -229,9 +238,6 @@ public class OrderService {
         return listOrder;
     }
     
-    
-    
-
 
     public void updateOrderStatus(int status, int orderId){
         Order order = orderRepository.getReferenceById(orderId);

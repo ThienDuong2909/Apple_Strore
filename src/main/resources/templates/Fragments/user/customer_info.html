@@ -55,7 +55,7 @@
         <div class="wrap-prod">
             <div class="profile-card">
                 <div class="profile-header">
-                    <img src="https://via.placeholder.com/150" alt="Avatar">
+                    <img th:src="@{/images/avatar.jpg}" alt="">
                     <h1><p th:text="${user.f_name} + ' ' + ${user.l_name}"></p></h1>
                 </div>
                 <div class="profile-body">

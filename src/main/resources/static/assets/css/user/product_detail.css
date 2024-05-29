@@ -85,6 +85,7 @@
     background-color: #cccccc;
 }
 
+
 .info-box {
     background-color: #f2f2f2;
     padding: 10px;
@@ -98,10 +99,33 @@
 }
 
 .customer-info {
-    margin-top: 40px; /* Điều chỉnh khoảng cách giữa "Thông tin khách hàng" và dòng "Giá tiền" */
+    margin-top: 40px; 
 }
 
 .customer-title {
-    margin-bottom: 20px; /* Điều chỉnh khoảng cách dưới của tiêu đề "Thông tin khách hàng" */
+    margin-bottom: 20px; 
 }
   	
+
+.wrap-each-info{
+    margin: 20px 10px ;
+}
+.wrap-each-info > input{
+    margin-top: 4px;
+    border: #cccccc 1px solid;
+    padding: 8px 16px;
+    width: 100%;
+    border-radius: 8px;
+}
+.modal-locale-modal{
+    font-size: 24px;
+}
+.confirm-locale-btn{
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 8px;
+    float: right;
+    margin-right: 10px;
+}
+

@@ -31,11 +31,11 @@
     justify-content: center;
     position: relative;
     transition: box-shadow 0.5s ease;
-    box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
+    /*box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;*/
     max-width: 17%;
 }
 .product-box:hover{
-    box-shadow: rgba(0, 0, 0, 0.3) 0 19px 38px, rgba(0, 0, 0, 0.22) 0 15px 12px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
 }
 .product-image{
     margin: 25px 0 20px 0;

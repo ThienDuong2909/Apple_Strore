@@ -59,13 +59,20 @@
 #wrapper__input__login {
     display: flex;
     flex-direction: column;
-    gap: 0px;
 }
 
 label {
     font-size: 17px;
     font-weight: 500;
 }
+
+/*#toast {*/
+/*    height: 100px;*/
+/*    width: 100px;*/
+/*    background-color: black;*/
+/*    position: absolute;*/
+/*    z-index: 3;*/
+/*}*/
 
 #fill__password, #fill__username {
     font-size: 14px;
@@ -196,6 +203,93 @@ label {
     scale: 1.02;
 }
 
+
+/*TOAST*/
+#toast {
+    position: fixed;
+    top: 80px;
+    right: 40px;
+    z-index: 3;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(calc(100% + 40px));
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+    }
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.toast {
+    padding: 10px 0;
+    min-width: 300px;
+    max-width: 370px;
+    background-color: white;
+    border-left: 4px solid;
+    box-shadow: 1px 2px 10px grey;
+    animation: slideInLeft 0.5s ease, fadeOut 1s ease 3s forwards;
+    transition: all 0.3s ease;
+}
+
+.toast+.toast {
+    margin-top: 20px
+}
+
+.toast__icon {
+    font-size: 24px;
+}
+
+.toast__icon,
+.toast__close {
+    padding: 0 16px;
+}
+
+.toast__body {
+    flex-grow: 1;
+}
+
+.toast__success {
+    border-color: #43d158;
+}
+
+.toast__success .toast__icon,
+.toast__success .toast__title {
+    color: #43d158;
+}
+
+.toast__warning .toast__icon,
+.toast__warning .toast__title {
+    color: #F5B971;
+}
+
+.toast__warning {
+    border-color: #F5B971;
+}
+
+.toast__error {
+    border-color: #e04d28;
+}
+
+.toast__error .toast__icon,
+.toast__error .toast__title {
+    color: #e04d28;
+}
 
 
 

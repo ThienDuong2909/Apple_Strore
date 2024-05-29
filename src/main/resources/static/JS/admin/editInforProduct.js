@@ -108,10 +108,20 @@ $(document).ready(function() {
     });
 });
 
-$("#rollback-wrapper").click(function () {
-    setTimeout(function() {
-        console.log("Click")
-        $("#reload-form").submit()
-    }, 200);
-})
+// const uploadImg = document.querySelector('#upload-img')
+// const overloadImg = document.getElementById('overload__img')
+//
+// uploadImg.addEventListener('change', function (e) {
+//     const maxSize = 1024 * 1024 * 2;
+//     const fileSize = uploadImg.files[0];
+//     console.log(fileSize.size)
+//     if (fileSize.size > maxSize) {
+//         overloadImg.style.opacity = '1';
+//         uploadImg.value = '';
+//         console.log('File size is too large')
+//     } else {
+//         overloadImg.style.opacity = '0';
+//     }
+// })
+
 

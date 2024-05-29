@@ -81,7 +81,10 @@
         </div>
 
         <div id="tableArea">
-            <div class="tableWrapper">
+            <div th:if="${listAllProduct.size() == 0}" id="wrapper__empty__list">
+                <h3>Danh sách trống</h3>
+            </div>
+            <div class="tableWrapper" th:if="${listAllProduct.size() > 0}">
                 <table class="productTable">
                     <tr class="table-header">
                         <th>STT</th>
@@ -94,6 +97,7 @@
                         <th>Hình ảnh</th>
                         <th>Thao tác</th>
                     </tr>
+
                     <th:block th:each="ProductDto : ${listAllProduct}">
                         <tr id="productTr">
                             <td class="stt-column"></td>
@@ -182,22 +186,22 @@
                     <div class="header-wrapper">
                         <div class="wrapper-name">
                             <span class="input-group-text" id="addon-wrapping-0">Tên sản phẩm:</span>
-                            <input type="text" name="name" class="add-form-control" aria-label="Username" aria-describedby="addon-wrapping" minlength="6" maxlength="100" required="required">
+                            <input type="text" name="name" id="input__name" class="add-form-control" aria-label="Username" aria-describedby="addon-wrapping" minlength="6" maxlength="100" required="required">
                         </div>
 
                         <div class="wrapper-price">
                             <span class="input-group-text" id="addon-wrapping-7">Giá:</span>
-                            <input type="text" name="price" class="add-form-control" aria-label="Username" aria-describedby="addon-wrapping" minlength="7" required="required">
+                            <input type="text" name="price" id="input__price" class="add-form-control" aria-label="Username" aria-describedby="addon-wrapping" minlength="7" required="required">
                         </div>
 
                         <div class="wrapper-color">
                             <span class="input-group-text" id="addon-wrapping-8">Màu sắc:</span>
-                            <input type="text" name="color" class="add-form-control" aria-label="Username" aria-describedby="addon-wrapping" minlength="1" required="required">
+                            <input type="text" name="color" id="input__color" class="add-form-control" aria-label="Username" aria-describedby="addon-wrapping" minlength="1" required="required">
                         </div>
 
                         <div class="wrapper-stock">
                             <span class="input-group-text" id="addon-wrapping-9">Số lượng:</span>
-                            <input type="number" name="stock" class="add-form-control" aria-label="Username" aria-describedby="addon-wrapping" min="1" required="required">
+                            <input type="number" name="stock" id="input__quantity" class="add-form-control" aria-label="Username" aria-describedby="addon-wrapping" min="1" required="required">
                         </div>
 
                         <div class="wrapper-image">
@@ -211,13 +215,13 @@
 
                         <div class="wrapper-description">
                             <span class="input-group-text" id="addon-wrapping-6">Mô tả sản phẩm:</span>
-                            <textarea name="description" class="add-form-control" aria-label="Username" aria-describedby="addon-wrapping" minlength="10" required="required"></textarea>
+                            <textarea name="description" id="input__des" class="add-form-control" aria-label="Username" aria-describedby="addon-wrapping" minlength="10" required="required"></textarea>
                         </div>
                     </div>
 
                     <div class="footer-wrapper">
                         <button type="button" class="btn btn-second" onclick="closeEditModal(addNewFormWrapper)">Hủy</button>
-                        <button th:href="@{admin/save}" type="submit" class="btn btn-primary">Thêm</button>
+                        <button th:href="@{admin/save}" type="submit" class="btn btn-primary" id="add__product__btn">Thêm</button>
                     </div>
                 </form>
             </div>

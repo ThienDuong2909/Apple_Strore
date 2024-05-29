@@ -99,6 +99,7 @@ public class OrderService {
 
             detailOrderDto detailOrder = new detailOrderDto();
             detailOrder.setOrder_id(order.getOrder_id());
+            detailOrder.setProduct_id(product.getProduct_id());
             detailOrder.setOrder_date(order.getOrder_date());
             detailOrder.setProduct_name(product.getName());
             detailOrder.setProduct_color(product.getColor());

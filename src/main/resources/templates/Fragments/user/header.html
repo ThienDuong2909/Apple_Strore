@@ -61,14 +61,26 @@
             	<i class="fa-regular fa-cart-shopping icon cart-icon" style="color: #ffffff;"></i>
              </a>
             
-            <a th:href="@{/user/customer_info}" class="avatar-link">
+<!--            <a th:href="@{/user/customer_info}" class="avatar-link">-->
+            <div class="wrap-action-personal-all">
                 <i class="fa-regular fa-circle-user icon avatar-icon" style="color: #ffffff;"></i>
-            </a>
-
+                <div class="wrap-action-personal">
+                    <a th:href="@{/user/customer_info}" class="avatar-link"><p>Thông tin cá nhân</p></a>
+                    <a th:href="@{/user/change-password}"><p>Đổi mật khẩu</p></a>
+                    <form th:action="@{/logout}" method="POST" id="logout-form">
+                        <p onclick="clickLogout()">Đăng xuất</p>
+                    </form>
+                </div>
+            </div>
+<!--            </a>-->
         </div>
     </div>
 
-
+<script>
+    function clickLogout(){
+        document.getElementById('logout-form').submit()
+    }
+</script>
 </div>
 </body>
 </html>

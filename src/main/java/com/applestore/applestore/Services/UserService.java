@@ -7,6 +7,7 @@ import com.applestore.applestore.Exception.UserNotFoundException;
 import com.applestore.applestore.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ import java.util.*;
 public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final RoleService roleService;
-    private UserRepository userRepo;
+    private final UserRepository userRepo;
     @Autowired
     public UserService(UserRepository userRepo, RoleService roleService, PasswordEncoder passwordEncoder) {
         this.userRepo = userRepo;
@@ -134,5 +135,14 @@ public class UserService {
         userEntity.setAuthProvider(authenticationProvider);
         userRepo.save(userEntity);
         return userEntity;
+    }
+    public UserEntity findByUsername(String username) {
+        Optional<UserEntity> userEntityOptional = userRepo.findByUsername(username);
+        return userEntityOptional.orElse(null);
+    }
+    public void changePassword(String tenTaiKhoan, String matKhauMoi) {
+        UserEntity user = this.findByUsername(tenTaiKhoan);
+        user.setPassword(passwordEncoder.encode(matKhauMoi));
+        userRepo.save(user);
     }
 }

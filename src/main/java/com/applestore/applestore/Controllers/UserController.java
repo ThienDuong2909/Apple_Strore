@@ -15,6 +15,7 @@ import com.applestore.applestore.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,6 +50,9 @@ public class UserController {
 	
 	@Autowired
 	private OrderService orderService ;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public UserEntity curUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -324,5 +328,29 @@ public class UserController {
         model.addAttribute("listDetailOrder",listOrder );
         
         return "/Fragments/user/purchase_history";
+    }
+
+    @GetMapping("/change-password" )
+    public String changePasswordPage(Model model){
+        UserEntity user = curUser();
+
+        model.addAttribute("username", user.getUsername());
+        return "Fragments/user/change_password";
+    }
+    @PostMapping("/change-password" )
+    public String changePassword(@RequestParam("username") String username,
+                                 @RequestParam("newPw") String newPw,
+                                 @RequestParam("oldPw") String oldPw){
+        System.out.println("taiKhoan: "+username);
+        System.out.println("matKhauCu: "+oldPw);
+        System.out.println("matKhauMoi: "+newPw);
+        UserEntity user = userService.findByUsername(username);
+        System.out.println("User: "+user);
+        if (passwordEncoder.matches(oldPw, user.getPassword())) {
+            userService.changePassword(username, newPw);
+            return "redirect:/user/change-password?success";
+        } else {
+            return "redirect:/user/change-password?fail"; // Trả về lỗi nếu mật khẩu hiện tại không khớp
+        }
     }
 }

@@ -50,4 +50,19 @@ public class UserEntity {
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")}
     )
     private Collection<Role> roles;
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "user_id=" + user_id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", f_name='" + f_name + '\'' +
+                ", l_name='" + l_name + '\'' +
+                ", resetPasswordToken='" + resetPasswordToken + '\'' +
+                ", authProvider=" + authProvider +
+                ", gmail='" + gmail + '\'' +
+                ", roles=" + roles +
+                '}';
+    }
 }

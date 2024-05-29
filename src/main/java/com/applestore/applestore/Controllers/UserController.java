@@ -164,7 +164,7 @@ public class UserController {
     public String index(Model model){
         List<ProductDto> listAllProduct = productService.listALlProduct();
         if(listAllProduct.size() > 20){
-            listAllProduct = listAllProduct.subList(0, 20);
+            listAllProduct = listAllProduct.subList(0, 15);
         }
         model.addAttribute("listAllProduct", listAllProduct);
     	return "/Fragments/user/index";
@@ -291,7 +291,14 @@ public class UserController {
 		
         return "/Fragments/user/checkout";
     }
-    
+
+    @PostMapping("/purchase-detail-info")
+    public String purchaseDetailInfo(
+            CustomerDto customerDto
+    ){
+        System.out.println(customerDto);
+        return "redirect:/user/";
+    }
     @GetMapping("/purchase_history")
     public String purchaseHistory(
     		Authentication authentication,

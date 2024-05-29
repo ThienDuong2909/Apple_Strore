@@ -84,3 +84,25 @@
     flex-direction: column;
     background-color: #cccccc;
 }
+
+.wrap-each-info{
+    margin: 20px 10px ;
+}
+.wrap-each-info > input{
+    margin-top: 4px;
+    border: #cccccc 1px solid;
+    padding: 8px 16px;
+    width: 100%;
+    border-radius: 8px;
+}
+.modal-locale-modal{
+    font-size: 24px;
+}
+.confirm-locale-btn{
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 8px;
+    float: right;
+    margin-right: 10px;
+}

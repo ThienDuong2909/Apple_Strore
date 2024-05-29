@@ -29,7 +29,7 @@ resetPasswordBtn.addEventListener('click', (e) => {
     } else {
         errorConfirmNewPassword.style.opacity = '0'
     }
-    if (inputNewPassword.value !== '' && inputConfirmPassword.value !== '' && inputConfirmPassword.value === inputNewPassword.value) {
+    if (inputNewPassword.value !== '' && inputConfirmPassword.value !== '' && inputConfirmPassword.value === inputNewPassword.value && inputNewPassword.value.length >= 5) {
         resetPasswordForm.submit();
     }
 })

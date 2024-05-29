@@ -56,18 +56,10 @@ public class AuthController {
             ,BindingResult result, Model model
     ) {
         System.out.println("User"+user);
-//        UserDto existingUserEmail = userService.findByGmail(user.getGmail());
-//        if (existingUserEmail != null && existingUserEmail.getGmail() != null && !existingUserEmail.getGmail().isEmpty()) {
-//            return "redirect:/register?fail";
-//        }
-//        UserDto existingUserUsername = userService.findByUsername(user.getUsername());
-//        if (existingUserUsername != null && existingUserUsername.getUsername() != null && !existingUserUsername.getUsername().isEmpty()) {
-//            return "redirect:/register?fail";
-//        }
-//        if (result.hasErrors()) {
-//            model.addAttribute("user", user);
-//            return "/Fragments/auth/register";
-//        }
+        UserEntity userEntity = userService.findByGmail(user.getGmail());
+        if(userEntity != null){
+            return "redirect:/register?fail";
+        }
         userService.saveUser(user);
         return "redirect:/register?success";
     }
@@ -157,6 +149,6 @@ public class AuthController {
             userService.updatePassword(userEntity, newPassword);
             model.addAttribute("message", "You have successfully changed your password");
         }
-        return "/Fragments/auth/login";
+        return "redirect:/login";
     }
 }

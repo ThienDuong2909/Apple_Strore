@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{Layouts/user-main.html}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch sử mua hàng</title>
+    
+    <link rel="stylesheet" th:href="@{/assets/css/user/purchase_history.css}" type="text/css">
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="wrap-tools">
+        <div class="toolbar">
+            <div class="funtionsBar">
+                <form th:action="@{/user/purchase_history}" method="get" id="sort-form">
+                    <div class="sort">
+                        <label class="sortLabel" for="comboBox">Sắp xếp theo</label>
+                        <select id="Time" name="Time" onchange="submitSortForm()">
+                        	<option value="">Chọn</option>
+                            <option value="newest">Mới nhất</option>
+                            <option value="oldest">Cũ nhất</option>
+                        </select>
+                    </div>
+                </form>
+
+                <div class="filterStatus">
+                    <form class="StatusComboBoxForm" th:action="@{/user/purchase_history}" method="get">
+                        <label class="StatusComboBoxLabel" th:for="options">Lọc theo trạng thái</label>
+                        <select id="Status" name="Status">
+                            <option value="">Tất cả </option>
+                            <option value="Chờ xét duyệt">Chờ xét duyệt</option>
+                            <option value="Đã xét duyệt">Đã xét duyệt</option>
+                            <option value="Đã giao hàng">Đã giao hàng</option>
+                        </select>
+                        <button class="filterStatusBtn" type="submit"><i class="far fa-filter" style="font-size: 20px; color: white"></i></button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="wrap">
+        <div class="order-container">
+            <div class="order-header">
+                <h1>Danh sách đơn hàng</h1>
+            </div>
+            <div class="order-list">
+                <div th:each="listDetailOrder : ${listDetailOrder}" class="order-item">
+                    <img style="max-width:100%;" th:src="'data:image/jpeg;base64,' + ${listDetailOrder.getImg()}" alt="Sản phẩm">
+                    <div>
+                        <h2>Đơn hàng #<span th:text="${listDetailOrder.getOrder_id()}"></span></h2>
+                        <p><strong>Tên sản phẩm: </strong><span th:text="${listDetailOrder.getProduct_name()}"></span></p>
+                        <p><strong>Màu sắc: </strong><span th:text="${listDetailOrder.getProduct_color()}"></span></p>
+                        <p><strong>Giá tiền: </strong><span th:text="${listDetailOrder.getPrice()}"></span></p>
+                        <p><strong>Ngày mua hàng: </strong><span th:text="${listDetailOrder.getOrder_date()}"></span></p>
+                        <p><strong>Địa chỉ nhận hàng: </strong><span th:text="${listDetailOrder.getAddress_line()}"></span></p>
+                        <p><strong>Trạng thái: </strong><span th:text="${listDetailOrder.getStatus()}"></span></p>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="order-footer">
+                <button onclick="goBack()" class="back-button">Quay lại</button>
+            </div>
+        </div>
+    </div>
+    
+    <script th:inline="javascript">      
+        function goBack() {
+            window.history.back();
+        }
+
+        function submitSortForm() {
+            document.getElementById('sort-form').submit();
+        }
+    </script>
+</section>
+</body>
+</html>

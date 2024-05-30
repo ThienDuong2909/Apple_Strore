@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{Layouts/admin-main.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Quan li don hang</title>
+    <link rel="stylesheet" th:href="@{../../assets/css/admin/management-order.css}" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+    <script src="https://unpkg.com/currency.js@~2.0.0/dist/currency.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+    <section layout:fragment="content">
+        <div id="container">
+            <div id="wrapper__title">
+                <h1 id="content__title">Danh sách tất cả đơn hàng</h1>
+            </div>
+
+<!--            <div class="wrapper__functions__bar">-->
+<!--                <div id="wrapper__search__order">-->
+<!--                    <input type="text" id="search__order__input" name ="search__order"/>-->
+<!--                    <label for="search__order__input">-->
+<!--                        <i class="fas fa-search" id="search__order__icon"></i>-->
+<!--                    </label>-->
+<!--                </div>-->
+<!--            </div>-->
+
+            <div class="container-fluid" id="wrapper__table__product">
+                <table id="detail__order__table" class="table">
+                    <thead>
+                    <tr id="header__row">
+                        <th>ID</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Màu sắc</th>
+                        <th>Giá</th>
+                        <th>Khách hàng</th>
+                        <th>Địa chỉ</th>
+                        <th>Ngày đặt</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="detail : ${listDetailOrder}">
+                        <tr id="body__row">
+                            <td th:text="${detail.getOrder_id()}"></td>
+                            <td th:text="${detail.getProduct_name()}"></td>
+                            <td th:text="${detail.getProduct_color()}"></td>
+                            <td id="priceField" th:text="${detail.getPrice()}"></td>
+                            <td th:text="${detail.getCustomer_f_name()} + ' ' + ${detail.getCustomer_l_name()}"></td>
+                            <td th:text="${detail.getAddress_line()} +', ' + ${detail.getCity()} + ', ' + ${detail.getCountry()}"></td>
+                            <td th:text="${detail.getOrder_date()}"></td>
+                        </tr>
+                    </th:block>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

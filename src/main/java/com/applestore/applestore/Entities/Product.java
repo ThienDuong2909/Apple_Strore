@@ -9,19 +9,22 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int product_id;
 
-    @Column(unique = true, nullable = false)
+    @Column(columnDefinition = "nvarchar(255)", nullable = false)
     private String name;
 
-    @Column(unique = true, nullable = false)
+    @Column(columnDefinition = "nvarchar(max)", nullable = false)
     private String description;
 
-    @Column(unique = true, nullable = false)
+    @Column(columnDefinition = "nvarchar(50)", nullable = false)
+    private String color;
+
+    @Column(columnDefinition = "nvarchar(20)", nullable = false)
     private String stock;
 
-    @Column(unique = true, nullable = false)
-    private String price;
+    @Column(nullable = false)
+    private int price;
 
-    @Column(unique = true, nullable = true)
+    @Column(columnDefinition = "varchar(max)", nullable = false)
     private String img;
 
     public int getProduct_id() {
@@ -56,12 +59,20 @@ public class Product {
         this.stock = stock;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 
     public String getImg() {

@@ -1,0 +1,131 @@
+.breadcrumb-prod-detail{
+    padding-top: 8px;
+    display: flex;
+    flex-direction: row;
+    background-color: #ffffff;
+    font-size: 16px;
+    list-style-type:none;
+    width: 1200px;
+    margin: 20px auto;
+}
+
+.wrap-prod-detail{
+    width: 1200px;
+    margin: 0 auto;
+
+}
+.product-detail-container{
+    display: flex;
+    flex-direction: row;
+    font-size: 16px;
+}
+.product-detail-wrap-image{
+    background-color: #F5F5F7;
+    border-radius: 8px;
+    width: 49%;
+}
+
+.product-detail-wrap-image img{
+    margin: 20px;
+}
+.product-info{
+    margin-left: 40px;
+    flex:1;
+}
+
+.pro-detail-name{
+    font-size: 24px;
+}
+.pro-detail-price{
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 8px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #0066CC;
+}
+.pro-detail-color{
+   
+    margin-bottom: 12px;
+    margin-left: 10px;
+}
+
+.pro-detail-descript{
+    display: block;
+    margin-bottom: 12px;
+    margin-left: 10px;
+}
+
+.wrap-action-pro-detail-btn{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+}
+.buy-button, .back-button{
+    width: 48.5%;
+    height: 100%;
+    border-radius: 8px;
+    border: 2px solid #0066CC;
+    color: #0066CC;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    cursor: pointer;
+
+}
+.buy-button:hover, .back-button:hover{
+    opacity: .5;
+}
+.form-buy-info{
+    display: flex;
+    flex-direction: column;
+    background-color: #cccccc;
+}
+
+
+.info-box {
+    background-color: #f2f2f2;
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.data-value {
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+.customer-info {
+    margin-top: 40px; 
+}
+
+.customer-title {
+    margin-bottom: 20px; 
+}
+  	
+
+.wrap-each-info{
+    margin: 20px 10px ;
+}
+.wrap-each-info > input{
+    margin-top: 4px;
+    border: #cccccc 1px solid;
+    padding: 8px 16px;
+    width: 100%;
+    border-radius: 8px;
+}
+.modal-locale-modal{
+    font-size: 24px;
+}
+.confirm-locale-btn{
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 8px;
+    float: right;
+    margin-right: 10px;
+}
+

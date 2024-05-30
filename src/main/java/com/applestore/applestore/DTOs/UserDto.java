@@ -1,13 +1,15 @@
 package com.applestore.applestore.DTOs;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+@Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class UserDto {
+    private int user_id;
     private String username;
     private String password;
     private String gmail;

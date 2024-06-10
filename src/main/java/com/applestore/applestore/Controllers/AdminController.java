@@ -157,18 +157,35 @@ public class AdminController {
         return "Fragments/admin/delivered-order";
     }
 
+    @GetMapping("canceled")
+    public String viewListCanceledOrder(Model model){
+        model.addAttribute("listCanceledOrder", orderService.getCanceledOrder(-1));
+        return "Fragments/admin/canceled-order";
+    }
+
     @GetMapping("accept/orderid={id}")
     public String acceptOrder(@PathVariable("id") Integer orderId){
-        System.out.println("OrderID: " + orderId);
-        orderService.updateOrderStatus(1,orderId);
+        orderService.updateOrderStatus(1,orderId,"");
         return "redirect:/admin/notApproved";
     }
 
     @GetMapping("complete/orderid={id}")
     public String completeOrder(@PathVariable("id") Integer orderId){
-        System.out.println("OrderID: " + orderId);
-        orderService.updateOrderStatus(2,orderId);
+        orderService.updateOrderStatus(2,orderId, "");
         return "redirect:/admin/isApproved";
+    }
+
+//    @GetMapping("cancel/orderid={id}?reason={reason}")
+//    public String cancelOrder(@PathVariable("id") Integer orderId, @PathVariable("reason") String reason){
+//        System.out.println("Reason: " + reason);
+//        orderService.updateOrderStatus(-1,orderId,reason);
+//        return "redirect:/admin/notApproved";
+//    }
+    @GetMapping("cancel/orderid={id}/reason={reason}")
+    public String cancelOrder(@PathVariable("id") Integer orderId, @PathVariable("reason") String reason){
+        System.out.println("Reason: " + reason);
+        orderService.updateOrderStatus(-1,orderId,reason);
+        return "redirect:/admin/notApproved";
     }
 
 }

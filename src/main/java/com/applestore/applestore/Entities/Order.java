@@ -18,6 +18,9 @@ public class Order {
     @Column(nullable = false)
     private String order_date;
 
+    @Column(nullable = true)
+    private String note;
+
     @Column(nullable = false)
     private int status;
 
@@ -56,7 +59,16 @@ public class Order {
     public int getStatus() {
         return status;
     }
+
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 }

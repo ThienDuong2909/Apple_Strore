@@ -5,7 +5,7 @@
       layout:decorate="~{Layouts/admin-main.html}">
 <head>
     <meta charset="UTF-8">
-    <title>Quan li don hang</title>
+    <title>Quản lí đơn hàng</title>
     <link rel="stylesheet" th:href="@{../../assets/css/admin/management-order.css}" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
     <script src="https://unpkg.com/currency.js@~2.0.0/dist/currency.min.js"></script>
@@ -17,16 +17,6 @@
             <div id="wrapper__title">
                 <h1 id="content__title">Danh sách tất cả đơn hàng</h1>
             </div>
-
-<!--            <div class="wrapper__functions__bar">-->
-<!--                <div id="wrapper__search__order">-->
-<!--                    <input type="text" id="search__order__input" name ="search__order"/>-->
-<!--                    <label for="search__order__input">-->
-<!--                        <i class="fas fa-search" id="search__order__icon"></i>-->
-<!--                    </label>-->
-<!--                </div>-->
-<!--            </div>-->
-
             <div class="container-fluid" id="wrapper__table__product">
                 <table id="detail__order__table" class="table">
                     <thead>
@@ -38,6 +28,7 @@
                         <th>Khách hàng</th>
                         <th>Địa chỉ</th>
                         <th>Ngày đặt</th>
+                        <th>Trạng thái</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -50,6 +41,12 @@
                             <td th:text="${detail.getCustomer_f_name()} + ' ' + ${detail.getCustomer_l_name()}"></td>
                             <td th:text="${detail.getAddress_line()} +', ' + ${detail.getCity()} + ', ' + ${detail.getCountry()}"></td>
                             <td th:text="${detail.getOrder_date()}"></td>
+                            <td th:switch="${detail.getOrderStatus()}">
+                                <h6 th:case="-1" id="delete__approved__order">Đã hủy</h6>
+                                <h6 th:case="0" id="not__approved__order">Chờ duyệt</h6>
+                                <h6 th:case="1" id="approved__order">Đã duyệt</h6>
+                                <h6 th:case="2" id="delivered__order">Đã giao</h6>
+                            </td>
                         </tr>
                     </th:block>
                     </tbody>

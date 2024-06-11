@@ -37,8 +37,9 @@
         }
         .order-item {
             background-color: #f8f9fa;
-            border-radius: 5px;
+            border-radius: 15px;
             padding: 20px;
+            border-left: 25px solid #000;
             margin-bottom: 15px;
             display: flex;
             align-items: center;
@@ -139,7 +140,7 @@
             background-color: #eeeeee;
             align-items: center;
             justify-content: center;
-            width: 310px;
+            width: 340px;
             height: 50px;
             border-radius: 50px;
             border: 2px solid #dddddd;
@@ -168,12 +169,15 @@
         }
         
         .filterStatusBtn {
-            width: 60px;
-            height: 35px;
-            margin-right: 10px;
-            border-radius: 50px;
-            outline: none;
-            border-style: none;
-            background-color: #000000;
+            border-radius: 50%; 
+	        width: 40px; 
+	        height: 40px; 
+	        display: flex;
+	        align-items: center;
+	        justify-content: center;
+	        background-color:  #000000; /* Màu nền của nút */
+	        border: none; /* Xóa viền mặc định */
+	        cursor: pointer; /* Thay đổi con trỏ khi hover */
+            
         }
             

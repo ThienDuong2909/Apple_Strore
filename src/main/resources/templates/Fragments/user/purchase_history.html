@@ -34,6 +34,7 @@
                             <option value="Chờ xét duyệt">Chờ xét duyệt</option>
                             <option value="Đã xét duyệt">Đã xét duyệt</option>
                             <option value="Đã giao hàng">Đã giao hàng</option>
+                            <option value="Đơn hàng bị hủy">Đơn hàng bị hủy</option>
                         </select>
                         <button class="filterStatusBtn" type="submit"><i class="far fa-filter" style="font-size: 20px; color: white"></i></button>
                     </form>
@@ -48,18 +49,21 @@
                 <h1>Danh sách đơn hàng</h1>
             </div>
             <div class="order-list">
-                <div th:each="listDetailOrder : ${listDetailOrder}" class="order-item">
-                    <img style="max-width:100%;" th:src="'data:image/jpeg;base64,' + ${listDetailOrder.getImg()}" alt="Sản phẩm">
+                <div th:each="DetailOrder : ${listDetailOrder}" class="order-item">
+                
+                    <img style="max-width:100%;" th:src="'data:image/jpeg;base64,' + ${DetailOrder.getImg()}" alt="Sản phẩm">
                     <div>
-                        <h2>Đơn hàng #<span th:text="${listDetailOrder.getOrder_id()}"></span></h2>
-                        <p><strong>Tên sản phẩm: </strong><span th:text="${listDetailOrder.getProduct_name()}"></span></p>
-                        <p><strong>Màu sắc: </strong><span th:text="${listDetailOrder.getProduct_color()}"></span></p>
-                        <p><strong>Giá tiền: </strong><span th:text="${listDetailOrder.getPrice()}"></span></p>
-                        <p><strong>Ngày mua hàng: </strong><span th:text="${listDetailOrder.getOrder_date()}"></span></p>
-                        <p><strong>Địa chỉ nhận hàng: </strong><span th:text="${listDetailOrder.getAddress_line()}"></span></p>
-                        <p><strong>Trạng thái: </strong><span th:text="${listDetailOrder.getStatus()}"></span></p>
-                    </div>
-                    
+                        <h2>Đơn hàng #<span th:text="${DetailOrder.getOrder_id()}"></span></h2>
+                        <p><strong>Tên sản phẩm: </strong><span th:text="${DetailOrder.getProduct_name()}"></span></p>
+                        <p><strong>Màu sắc: </strong><span th:text="${DetailOrder.getProduct_color()}"></span></p>
+                        <p><strong>Giá tiền: </strong><span th:text="${DetailOrder.getPrice()}"></span></p>
+                        <p><strong>Ngày mua hàng: </strong><span th:text="${DetailOrder.getOrder_date()}"></span></p>
+                        <p><strong>Địa chỉ nhận hàng: </strong><span th:text="${DetailOrder.getAddress_line()}"></span></p>
+                        <p><strong>Trạng thái: </strong><span th:text="${DetailOrder.getStatus()}"></span></p>
+                        <div th:if="${DetailOrder.getNote() != null}">
+                        	<p><strong>Lí do: </strong><span th:text="${DetailOrder.getNote()}"></span></p>
+                        </div>
+                    </div>                  
                 </div>
             </div>
             <div class="order-footer">

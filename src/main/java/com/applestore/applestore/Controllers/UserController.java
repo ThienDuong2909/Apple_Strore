@@ -90,10 +90,7 @@ public class UserController {
 				
 			}else {
 				ds_SDT.add(ctmDto.getPhone());
-			}
-			
-			
-			
+			}		
 		}
 		
 		model.addAttribute("ds_SDT", ds_SDT);
@@ -112,7 +109,28 @@ public class UserController {
             Authentication authentication,
             Model model
     ){  
-//        CustomUserDetails u = (CustomUserDetails) authentication.getPrincipal();
+    	
+    	if (phone.length() != 10) {
+            model.addAttribute("error", "Số điện thoại phải có đúng 10 ký tự !");
+            model.addAttribute("address_line", address_line);
+            model.addAttribute("country", country);
+            model.addAttribute("city", city);
+            model.addAttribute("phone", phone);
+            return "/Fragments/user/customer_info";
+        }
+
+    	List<CustomerDto> customerDtos = customerService.list_CustomerDto();
+        for (CustomerDto ctmDto : customerDtos) {
+            if (ctmDto.getPhone().equals(phone)) {
+                model.addAttribute("error", "Số điện thoại đã tồn tại !");
+                model.addAttribute("address_line", address_line);
+                model.addAttribute("country", country);
+                model.addAttribute("city", city);
+                model.addAttribute("phone", phone);
+                return "/Fragments/user/customer_info";
+            }
+        }
+    	
         UserEntity user = curUser();
         CustomerDto customerDto = new CustomerDto();
         customerDto.setUser_id(user.getUser_id());
@@ -125,9 +143,7 @@ public class UserController {
         customerService.saveCustomer(customer);
 
 
-        model.addAttribute("customerDto", customerDto);
-        model.addAttribute("user", user);
-
+        
         return "redirect:/user/customer_info";
     }
 
@@ -244,11 +260,9 @@ public class UserController {
     		Authentication authentication,
     		Model model){
     	
-//
-    	CustomerDto customerDto = new CustomerDto();
-//        CustomUserDetails u = (CustomUserDetails) authentication.getPrincipal();
         UserEntity user = curUser();
 
+        CustomerDto customerDto = new CustomerDto();
         customerDto = customerService.getCustomerByuserId(user.getUser_id());
     	
         Product product = productService.getProductById(productId);
@@ -305,6 +319,7 @@ public class UserController {
         System.out.println(customerDto);
         return "redirect:/user/";
     }
+    
     @GetMapping("/purchase_history")
     public String purchaseHistory(Model model, @Param("Time") String Time, @Param("Status") String Status ){
 
@@ -321,6 +336,10 @@ public class UserController {
         return "/Fragments/user/purchase_history";
     }
 
+    
+    
+    
+    
     @GetMapping("/change-password" )
     public String changePasswordPage(Model model){
         UserEntity user = curUser();

@@ -141,6 +141,7 @@ public class OrderService {
         	orderDto.setProduct_id(order.getProduct_id());
         	orderDto.setOrder_date(order.getOrder_date());
         	orderDto.setStatus(order.getStatus());
+        	orderDto.setNote(order.getNote());
         	listOrder.add(orderDto);
         }
         
@@ -156,6 +157,7 @@ public class OrderService {
         	orderDto.setProduct_id(order.getProduct_id());
         	orderDto.setOrder_date(order.getOrder_date());
         	orderDto.setStatus(order.getStatus());
+        	orderDto.setNote(order.getNote());
         	listOrder.add(orderDto);
         }
         
@@ -165,31 +167,7 @@ public class OrderService {
     public List<detailOrderDto> getDetailOrderByCustomerId(int customer_id, String Time, String Status){
         List<detailOrderDto> listOrder = new ArrayList<>();
         
-        if( Time == null) {
-	        for (OrderDto orderDto : getOrderByCustomerId_DESC(customer_id)){
-	            CustomerDto customer = customerService.getCustomerById(orderDto.getCustomer_id());
-	            ProductDto product = productService.convertProductToDto(productService.getProductById(orderDto.getProduct_id()));
-	            detailOrderDto detailOrder = new detailOrderDto();
-	            detailOrder.setOrder_id(orderDto.getOrder_id());
-	            detailOrder.setOrder_date(orderDto.getOrder_date());
-	            detailOrder.setProduct_name(product.getName());
-	            detailOrder.setProduct_color(product.getColor());
-	            detailOrder.setPrice(product.getPrice());
-	            detailOrder.setAddress_line(customer.getAddress_line() + ", " + customer.getCity() + ", " + customer.getCountry());
-	            detailOrder.setImg(product.getImg());
-	            if(orderDto.getStatus() == 0) {
-	            	detailOrder.setStatus("Chờ xét duyệt");
-	            }
-	            if(orderDto.getStatus() == 1) {
-	            	detailOrder.setStatus("Đã xét duyệt");
-	            }
-	            if(orderDto.getStatus() == 2) {
-	            	detailOrder.setStatus("Đã giao hàng");
-	            }
-	            
-	            listOrder.add(detailOrder);
-	        }
-        }else if(Time.equals("newest") || Time.equals("") ) {
+        if(Time == null || Time.equals("newest") || Time.equals("") ) {
         	for (OrderDto orderDto : getOrderByCustomerId_DESC(customer_id)){
 	            CustomerDto customer = customerService.getCustomerById(orderDto.getCustomer_id());
 	            ProductDto product = productService.convertProductToDto(productService.getProductById(orderDto.getProduct_id()));
@@ -201,6 +179,9 @@ public class OrderService {
 	            detailOrder.setPrice(product.getPrice());
 	            detailOrder.setAddress_line(customer.getAddress_line() + ", " + customer.getCity() + ", " + customer.getCountry());
 	            detailOrder.setImg(product.getImg());
+	            if(orderDto.getStatus() == -1) {
+	            	detailOrder.setStatus("Đơn hàng bị hủy");
+	            }
 	            if(orderDto.getStatus() == 0) {
 	            	detailOrder.setStatus("Chờ xét duyệt");
 	            }
@@ -210,6 +191,7 @@ public class OrderService {
 	            if(orderDto.getStatus() == 2) {
 	            	detailOrder.setStatus("Đã giao hàng");
 	            }
+	            detailOrder.setNote(orderDto.getNote());
 	            
 	            listOrder.add(detailOrder);
         	} 
@@ -226,6 +208,9 @@ public class OrderService {
 	            detailOrder.setPrice(product.getPrice());
 	            detailOrder.setAddress_line(customer.getAddress_line() + ", " + customer.getCity() + ", " + customer.getCountry());
 	            detailOrder.setImg(product.getImg());
+	            if(orderDto.getStatus() == -1) {
+	            	detailOrder.setStatus("Đơn hàng bị hủy");
+	            }
 	            if(orderDto.getStatus() == 0) {
 	            	detailOrder.setStatus("Chờ xét duyệt");
 	            }
@@ -235,12 +220,13 @@ public class OrderService {
 	            if(orderDto.getStatus() == 2) {
 	            	detailOrder.setStatus("Đã giao hàng");
 	            }
+	            detailOrder.setNote(orderDto.getNote());
 	            
 	            listOrder.add(detailOrder);
 	        }
         }
         
-        if (Status != null && (Status.equals("Chờ xét duyệt") || Status.equals("Đã xét duyệt") || Status.equals("Đã giao hàng"))) {
+        if (Status != null && (Status.equals("Chờ xét duyệt") || Status.equals("Đã xét duyệt") || Status.equals("Đã giao hàng") || Status.equals("Đơn hàng bị hủy"))) {
             List<detailOrderDto> filteredList = new ArrayList<>();
             for (detailOrderDto detailOrder : listOrder) {
                 if (detailOrder.getStatus().equals(Status)) {

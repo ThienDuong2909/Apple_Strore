@@ -49,6 +49,10 @@ body {
     height: 70vh;
 }
 
+#wrapper__empty__list {
+    text-align: center;
+}
+
 th, td {
     text-align: center;
     vertical-align: middle;

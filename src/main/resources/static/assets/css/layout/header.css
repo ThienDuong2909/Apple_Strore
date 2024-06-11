@@ -191,7 +191,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 2px;
+    gap: 10px;
 }
 
 #title__logout {
@@ -218,6 +218,7 @@
     border: none;
     border-radius: 8px;
     font-weight: 600;
+    font-size: 16px;
 }
 
 #confirm__logout__btn {

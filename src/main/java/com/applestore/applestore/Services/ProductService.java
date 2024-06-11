@@ -57,12 +57,8 @@ public class ProductService {
 
     public List<ProductDto> listALlProduct(){
         List<ProductDto> listAllProduct = new ArrayList<>();
-        System.out.println("List DTO: ");
         for(Product pro : productRepository.findAllProduct()){
             listAllProduct.add(convertProductToDto(pro));
-        }
-        for (ProductDto productDto : listAllProduct){
-            System.out.println(productDto.getName());
         }
         return listAllProduct;
     }
@@ -81,9 +77,14 @@ public class ProductService {
 
     public List<ProductDto> findProductByName(String search){
         List<ProductDto> listResult = new ArrayList<>();
-        for (Product pro : productRepository.findProductsByNameIgnoreCase(search)){
-            listResult.add(convertProductToDto(pro));
+        for (ProductDto proDto : listALlProduct()){
+            if (proDto.getName().toLowerCase().contains(search.toLowerCase())){
+                listResult.add(proDto);
+            }
         }
+//        for (Product pro : productRepository.findProductsByNameIgnoreCase(search)){
+//            listResult.add(convertProductToDto(pro));
+//        }
         return listResult;
     }
 

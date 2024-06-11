@@ -88,3 +88,7 @@ th, td {
     cursor: default;
 }
 
+#wrapper__empty__list {
+    text-align: center;
+}
+

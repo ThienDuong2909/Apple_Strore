@@ -18,39 +18,44 @@
                 <h1 id="content__title">Danh sách tất cả đơn hàng</h1>
             </div>
             <div class="container-fluid" id="wrapper__table__product">
-                <table id="detail__order__table" class="table">
-                    <thead>
-                    <tr id="header__row">
-                        <th>ID</th>
-                        <th>Tên sản phẩm</th>
-                        <th>Màu sắc</th>
-                        <th>Giá</th>
-                        <th>Khách hàng</th>
-                        <th>Địa chỉ</th>
-                        <th>Ngày đặt</th>
-                        <th>Trạng thái</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <th:block th:each="detail : ${listDetailOrder}">
-                        <tr id="body__row">
-                            <td th:text="${detail.getOrder_id()}"></td>
-                            <td th:text="${detail.getProduct_name()}"></td>
-                            <td th:text="${detail.getProduct_color()}"></td>
-                            <td id="priceField" th:text="${detail.getPrice()}"></td>
-                            <td th:text="${detail.getCustomer_f_name()} + ' ' + ${detail.getCustomer_l_name()}"></td>
-                            <td th:text="${detail.getAddress_line()} +', ' + ${detail.getCity()} + ', ' + ${detail.getCountry()}"></td>
-                            <td th:text="${detail.getOrder_date()}"></td>
-                            <td th:switch="${detail.getOrderStatus()}">
-                                <h6 th:case="-1" id="delete__approved__order">Đã hủy</h6>
-                                <h6 th:case="0" id="not__approved__order">Chờ duyệt</h6>
-                                <h6 th:case="1" id="approved__order">Đã duyệt</h6>
-                                <h6 th:case="2" id="delivered__order">Đã giao</h6>
-                            </td>
+                <div th:if="${listDetailOrder.size() == 0}" id="wrapper__empty__list">
+                    <h3 id="empty__list">Danh sách trống</h3>
+                </div>
+                <div th:unless="${listDetailOrder.size() == 0}">
+                    <table id="detail__order__table" class="table">
+                        <thead>
+                        <tr id="header__row">
+                            <th>ID</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Màu sắc</th>
+                            <th>Giá</th>
+                            <th>Khách hàng</th>
+                            <th>Địa chỉ</th>
+                            <th>Ngày đặt</th>
+                            <th>Trạng thái</th>
                         </tr>
-                    </th:block>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        <th:block th:each="detail : ${listDetailOrder}">
+                            <tr id="body__row">
+                                <td th:text="${detail.getOrder_id()}"></td>
+                                <td th:text="${detail.getProduct_name()}"></td>
+                                <td th:text="${detail.getProduct_color()}"></td>
+                                <td id="priceField" th:text="${detail.getPrice()}"></td>
+                                <td th:text="${detail.getCustomer_f_name()} + ' ' + ${detail.getCustomer_l_name()}"></td>
+                                <td th:text="${detail.getAddress_line()} +', ' + ${detail.getCity()} + ', ' + ${detail.getCountry()}"></td>
+                                <td th:text="${detail.getOrder_date()}"></td>
+                                <td th:switch="${detail.getOrderStatus()}">
+                                    <h6 th:case="-1" id="delete__approved__order">Đã hủy</h6>
+                                    <h6 th:case="0" id="not__approved__order">Chờ duyệt</h6>
+                                    <h6 th:case="1" id="approved__order">Đã duyệt</h6>
+                                    <h6 th:case="2" id="delivered__order">Đã giao</h6>
+                                </td>
+                            </tr>
+                        </th:block>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </section>

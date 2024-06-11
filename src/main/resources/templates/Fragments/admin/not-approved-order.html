@@ -24,43 +24,48 @@
                 <h1 id="content__title">Danh sách đơn hàng chờ duyệt</h1>
             </div>
             <div class="container-fluid" id="wrapper__table__product">
-                <table id="detailOrderTable" class="table">
-                    <thead>
-                    <tr id="header__row">
-                        <th>ID</th>
-                        <th>Tên sản phẩm</th>
-                        <th>Màu sắc</th>
-                        <th>Giá</th>
-                        <th>Khách hàng</th>
-                        <th>Số điện thoại</th>
-                        <th>Địa chỉ</th>
-                        <th>Ngày đặt</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <th:block th:each="order : ${listNotApproved}">
-                        <tr class="body__row">
-                            <td th:text="${order.getOrder_id()}"></td>
-                            <td th:text="${order.getProduct_name()}"></td>
-                            <td th:text="${order.getProduct_color()}"></td>
-                            <td id="priceField" th:text="${order.getPrice()}"></td>
-                            <td th:text="${order.getCustomer_l_name()} + ' ' + ${order.getCustomer_f_name()}"></td>
-                            <td th:text="${order.getPhone()}"></td>
-                            <td th:text="${order.getAddress_line()} +', ' + ${order.getCity()} + ', ' + ${order.getCountry()}"></td>
-                            <td th:text="${order.getOrder_date()}"></td>
-                            <td id="wrapper__handle">
-                                <button class="wrapper__accept__icon" th:data-id="${order.getOrder_id()}">
-                                    <i class="fas fa-check"></i>
-                                </button>
-                                <button class="wrapper__delete__icon" th:data-id="${order.getOrder_id()}">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </td>
+                <div th:if="${listNotApproved.size() == 0}" id="wrapper__empty__list">
+                    <h3 id="empty__list">Danh sách trống</h3>
+                </div>
+                <div th:unless="${listNotApproved.size() == 0}">
+                    <table id="detailOrderTable" class="table">
+                        <thead>
+                        <tr id="header__row">
+                            <th>ID</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Màu sắc</th>
+                            <th>Giá</th>
+                            <th>Khách hàng</th>
+                            <th>Số điện thoại</th>
+                            <th>Địa chỉ</th>
+                            <th>Ngày đặt</th>
+                            <th></th>
                         </tr>
-                    </th:block>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        <th:block th:each="order : ${listNotApproved}">
+                            <tr class="body__row">
+                                <td th:text="${order.getOrder_id()}"></td>
+                                <td th:text="${order.getProduct_name()}"></td>
+                                <td th:text="${order.getProduct_color()}"></td>
+                                <td id="priceField" th:text="${order.getPrice()}"></td>
+                                <td th:text="${order.getCustomer_l_name()} + ' ' + ${order.getCustomer_f_name()}"></td>
+                                <td th:text="${order.getPhone()}"></td>
+                                <td th:text="${order.getAddress_line()} +', ' + ${order.getCity()} + ', ' + ${order.getCountry()}"></td>
+                                <td th:text="${order.getOrder_date()}"></td>
+                                <td id="wrapper__handle">
+                                    <button class="wrapper__accept__icon" th:data-id="${order.getOrder_id()}">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                    <button class="wrapper__delete__icon" th:data-id="${order.getOrder_id()}">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </th:block>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div class="accept__order">

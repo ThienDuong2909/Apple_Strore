@@ -34,20 +34,16 @@ public class AdminController {
         List<ProductDto> listAllProduct = new ArrayList<>();
         List<String> listColor = productService.getAllColor();
         if (search == null && price == null && color == null) {
-            System.out.println("Normal list: ");
             listAllProduct = productService.listALlProduct();
         }
         else if (search != null){
-            System.out.println("Search result: ");
             listAllProduct = productService.findProductByName(search);
         }
         else {
             if (price != null){
                 if (price.equals("asc")){
-                    System.out.println("List ordered asc: ");
                     listAllProduct = productService.getAllOrderByPrice(true);
                 } else if (price.equals("desc")){
-                    System.out.println("List ordered desc: ");
                     listAllProduct = productService.getAllOrderByPrice(false);
                 }
             } else {
@@ -175,17 +171,18 @@ public class AdminController {
         return "redirect:/admin/isApproved";
     }
 
-//    @GetMapping("cancel/orderid={id}?reason={reason}")
-//    public String cancelOrder(@PathVariable("id") Integer orderId, @PathVariable("reason") String reason){
-//        System.out.println("Reason: " + reason);
-//        orderService.updateOrderStatus(-1,orderId,reason);
-//        return "redirect:/admin/notApproved";
-//    }
     @GetMapping("cancel/orderid={id}/reason={reason}")
     public String cancelOrder(@PathVariable("id") Integer orderId, @PathVariable("reason") String reason){
         System.out.println("Reason: " + reason);
         orderService.updateOrderStatus(-1,orderId,reason);
         return "redirect:/admin/notApproved";
+    }
+
+    @GetMapping("fail/orderid={id}/reason={reason}")
+    public String failDeliveredOrder(@PathVariable("id") Integer orderId, @PathVariable("reason") String reason){
+        System.out.println("Reason: " + reason);
+        orderService.updateOrderStatus(-1,orderId,reason);
+        return "redirect:/admin/isApproved";
     }
 
 }

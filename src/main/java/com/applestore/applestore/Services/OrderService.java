@@ -31,6 +31,8 @@ public class OrderService {
         orderDto.setOrder_id(order.getOrder_id());
         orderDto.setOrder_date(order.getOrder_date());
         orderDto.setCustomer_id(order.getCustomer_id());
+        orderDto.setNote(order.getNote());
+        orderDto.setStatus(order.getStatus());
         return orderDto;
     }
 
@@ -40,6 +42,8 @@ public class OrderService {
         order.setOrder_id(orderDto.getOrder_id());
         order.setOrder_date(orderDto.getOrder_date());
         order.setCustomer_id(orderDto.getCustomer_id());
+        order.setNote(orderDto.getNote());
+        order.setStatus(orderDto.getStatus());
         return order;
     }
 
@@ -50,7 +54,7 @@ public class OrderService {
         }
         System.out.println("List order: ");
         for (OrderDto orderDto : listAllOrder){
-            System.out.println(orderDto.getOrder_id());
+            System.out.println(orderDto.getStatus());
         }
         return listAllOrder;
     }
@@ -62,6 +66,7 @@ public class OrderService {
             CustomerDto customer = customerService.getCustomerById(orderDto.getCustomer_id());
             UserDto user = userService.getUserById(customer.getUser_id());
             ProductDto product = productService.convertProductToDto(productService.getProductById(orderDto.getProduct_id()));
+
             detailOrderDto detailOrder = new detailOrderDto();
             detailOrder.setOrder_id(orderDto.getOrder_id());
             detailOrder.setOrder_date(orderDto.getOrder_date());
@@ -74,6 +79,7 @@ public class OrderService {
             detailOrder.setAddress_line(customer.getAddress_line());
             detailOrder.setCity(customer.getCity());
             detailOrder.setCountry(customer.getCountry());
+            detailOrder.setOrderStatus(orderDto.getStatus());
             listDetailOrder.add(detailOrder);
         }
         return listDetailOrder;
@@ -85,7 +91,14 @@ public class OrderService {
         for (Order order : orderRepository.listApprovedOrNotOrder(status)){
             list.add(convertEntityToDto(order));
         }
-        System.out.println(getMoreDetailOrder(list));
+        return getMoreDetailOrder(list);
+    }
+
+    public List<detailOrderDto> getCanceledOrder(int status){
+        List<OrderDto> list = new ArrayList<>();
+        for (Order order : orderRepository.listApprovedOrNotOrder(status)){
+            list.add(convertEntityToDto(order));
+        }
         return getMoreDetailOrder(list);
     }
 
@@ -109,6 +122,7 @@ public class OrderService {
             detailOrder.setPrice(product.getPrice());
             detailOrder.setAddress_line(customer.getAddress_line());
             detailOrder.setCity(customer.getCity());
+            detailOrder.setNote(order.getNote());
             detailOrder.setCountry(customer.getCountry());
 
             System.out.println("Print at getMore: " + detailOrder.getOrder_id());
@@ -240,14 +254,21 @@ public class OrderService {
     }
     
 
-    public void updateOrderStatus(int status, int orderId){
-        Order order = orderRepository.getReferenceById(orderId);
-        order.setStatus(status);
-        orderRepository.save(order);
+    public void updateOrderStatus(int status, int orderId, String note){
+        if (note.isEmpty() || note == null){
+            Order order = orderRepository.getReferenceById(orderId);
+            order.setStatus(status);
+            orderRepository.save(order);
+        } else {
+            Order order = orderRepository.getReferenceById(orderId);
+            order.setStatus(status);
+            order.setNote(note);
+            orderRepository.save(order);
+        }
+
     }
     
     public void saveOrder(Order order) {
     	orderRepository.save(order);
     }
-
 }

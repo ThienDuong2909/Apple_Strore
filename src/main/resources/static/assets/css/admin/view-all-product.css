@@ -213,8 +213,11 @@ h1 {
     font-weight: 500;
 }
 
-#wrapper__empty__list {
-    
+#tableArea {
+    overflow: scroll;
+    scrollbar-width: thin;
+    height: 59%;
+    margin-top: 8px;
 }
 
 .tableWrapper {
@@ -241,6 +244,11 @@ h1 {
     border-collapse: collapse;
     text-align: center;
     width: 98%;
+}
+
+.table-header {
+    position: sticky;
+    top: 0;
 }
 
 .table-header > th{
@@ -431,7 +439,7 @@ button:hover, .upload-btn:hover {
     top: 0;
     left: 0;
     z-index: 5;
-    display: flex;
+    display: none;
     text-align: center;
 }
 

@@ -5,7 +5,7 @@
       layout:decorate="~{Layouts/admin-main.html}">
 <head>
     <meta charset="UTF-8">
-    <title>Quan li don hang</title>
+    <title>Đơn hàng đã giao</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
     <link rel="stylesheet" th:href="@{/assets/css/admin/delivered-order.css}" type="text/css">
     <script src="https://unpkg.com/currency.js@~2.0.0/dist/currency.min.js"></script>
@@ -16,7 +16,7 @@
         <div id="wrapper__title">
             <h1 id="content__title">Danh sách đơn hàng đã giao</h1>
         </div>
-        <div class="container-fluid">
+        <div class="container-fluid" id="wrapper__table__product">
             <table id="detailOrderTable" class="table">
                 <thead>
                 <tr id="header__row">

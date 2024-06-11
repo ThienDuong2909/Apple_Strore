@@ -17,38 +17,43 @@
         <h1 id="content__title">Danh sách đơn hàng đã hủy</h1>
     </div>
     <div class="container-fluid" id="wrapper__table__product">
-        <table id="detailOrderTable" class="table">
-            <thead>
-            <tr id="header__row">
-                <th>ID</th>
-                <th>Tên sản phẩm</th>
-                <th>Màu sắc</th>
-                <th>Giá</th>
-                <th>Tên khách hàng</th>
-                <th>SĐT</th>
-                <th>Địa chỉ</th>
-                <th>Ngày đặt</th>
-                <th>Lí do hủy</th>
-            </tr>
-            </thead>
-            <tbody>
-            <th:block th:each="order : ${listCanceledOrder}">
-                <tr id="body__row">
-                    <td th:text="${order.getOrder_id()}"></td>
-                    <td th:text="${order.getProduct_name()}"></td>
-                    <td th:text="${order.getProduct_color()}"></td>
-                    <td id="priceField" th:text="${order.getPrice()}"></td>
-                    <td th:text="${order.getCustomer_l_name()} + ' ' + ${order.getCustomer_l_name()}"></td>
-                    <td th:text="${order.getPhone()}"></td>
-                    <td th:text="${order.getAddress_line()} +', ' + ${order.getCity()} + ', ' + ${order.getCountry()}"></td>
-                    <td th:text="${order.getOrder_date()}"></td>
-                    <td id="cell__for__note">
-                        <h6 th:text="${order.getNote()}" id="note__order"></h6>
-                    </td>
+        <div th:if="${listCanceledOrder.size() == 0}" id="wrapper__empty__list">
+            <h3 id="empty__list">Danh sách trống</h3>
+        </div>
+        <div class="tableWrapper" th:if="${listCanceledOrder.size() > 0}">
+            <table id="detailOrderTable" class="table">
+                <thead>
+                <tr id="header__row">
+                    <th>ID</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Màu sắc</th>
+                    <th>Giá</th>
+                    <th>Tên khách hàng</th>
+                    <th>SĐT</th>
+                    <th>Địa chỉ</th>
+                    <th>Ngày đặt</th>
+                    <th>Lí do hủy</th>
                 </tr>
-            </th:block>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                <th:block th:each="order : ${listCanceledOrder}">
+                    <tr id="body__row">
+                        <td th:text="${order.getOrder_id()}"></td>
+                        <td th:text="${order.getProduct_name()}"></td>
+                        <td th:text="${order.getProduct_color()}"></td>
+                        <td id="priceField" th:text="${order.getPrice()}"></td>
+                        <td th:text="${order.getCustomer_l_name()} + ' ' + ${order.getCustomer_l_name()}"></td>
+                        <td th:text="${order.getPhone()}"></td>
+                        <td th:text="${order.getAddress_line()} +', ' + ${order.getCity()} + ', ' + ${order.getCountry()}"></td>
+                        <td th:text="${order.getOrder_date()}"></td>
+                        <td id="cell__for__note">
+                            <h6 th:text="${order.getNote()}" id="note__order"></h6>
+                        </td>
+                    </tr>
+                </th:block>
+                </tbody>
+            </table>
+        </div>
     </div>
 </section>
 </body>

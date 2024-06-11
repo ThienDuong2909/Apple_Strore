@@ -52,10 +52,6 @@ public class OrderService {
         for (Order order : orderRepository.findAllOrder()){
             listAllOrder.add(convertEntityToDto(order));
         }
-        System.out.println("List order: ");
-        for (OrderDto orderDto : listAllOrder){
-            System.out.println(orderDto.getStatus());
-        }
         return listAllOrder;
     }
 
@@ -125,7 +121,6 @@ public class OrderService {
             detailOrder.setNote(order.getNote());
             detailOrder.setCountry(customer.getCountry());
 
-            System.out.println("Print at getMore: " + detailOrder.getOrder_id());
             listDetailOrder.add(detailOrder);
         }
         return listDetailOrder;
@@ -241,7 +236,7 @@ public class OrderService {
     
 
     public void updateOrderStatus(int status, int orderId, String note){
-        if (note.isEmpty() || note == null){
+        if (note.isEmpty()){
             Order order = orderRepository.getReferenceById(orderId);
             order.setStatus(status);
             orderRepository.save(order);

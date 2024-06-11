@@ -280,6 +280,7 @@ addProductBtn.addEventListener('click', function (e) {
      emptyDes.style.opacity = '0';
 
      addNewForm.submit();
+
  })
 
 // VALIDATE EDIT PRODUCT FORM

@@ -211,7 +211,7 @@ th, td {
     position: fixed;
     top: 80px;
     right: 40px;
-    z-index: 2;
+    z-index: 5;
 }
 
 @keyframes slideInLeft {

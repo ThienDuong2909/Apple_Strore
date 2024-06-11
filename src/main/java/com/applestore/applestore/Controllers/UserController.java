@@ -67,16 +67,7 @@ public class UserController {
         }
         return userService.findByGmail(gmail);
     }
-	
-//	@GetMapping("/")
-//    public String index(Model model){
-//        UserEntity user = curUser();
-////
-//        model.addAttribute("name", user.getGmail()+user.getL_name()+user.getF_name());
-////        model.addAttribute("username",k.getUsername());
-//        return "/Fragments/user/header";
-//    }
-	
+
 	
     @GetMapping("/customer_info")
     public String CustomerInfo(Model model,Authentication authentication) {

@@ -105,8 +105,8 @@
                 <div class="product-box" th:each="product : ${listAllProduct}">
                     <a class="product-box-a" th:href="@{/user/product_detail(product_id=${product.getProduct_id()})}">
                         <div class="product-image">
-<!--                            <img th:src="'data:image/jpeg;base64,' + ${product.getImg()}"/>-->
-                            <img th:src="@{/images/img_1.png}" alt="">
+                            <img th:src="'data:image/jpeg;base64,' + ${product.getImg()}"/>
+                           <!-- <img th:src="@{/images/img_1.png}" alt="">-->
                         </div>
                         <div class="content-product-box">
                             <h2 class="product-name" th:text="${product.getName()}">

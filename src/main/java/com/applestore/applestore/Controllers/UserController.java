@@ -319,20 +319,23 @@ public class UserController {
         System.out.println(customerDto);
         return "redirect:/user/";
     }
-    
+
     @GetMapping("/purchase_history")
     public String purchaseHistory(Model model, @Param("Time") String Time, @Param("Status") String Status ){
 
         UserEntity user = curUser();
-		CustomerDto customerDto = new CustomerDto();
-		customerDto = customerService.getCustomerByuserId(user.getUser_id());
-		
-		List<detailOrderDto> listOrder = new ArrayList<>();
-		listOrder = orderService.getDetailOrderByCustomerId(customerDto.getCustomer_id(),Time, Status );
-				
-		
-        model.addAttribute("listDetailOrder",listOrder );
-        
+        CustomerDto customerDto = new CustomerDto();
+        customerDto = customerService.getCustomerByuserId(user.getUser_id());
+        if(customerDto != null) {
+            List<detailOrderDto> listOrder = new ArrayList<>();
+            listOrder = orderService.getDetailOrderByCustomerId(customerDto.getCustomer_id(),Time, Status );
+
+
+            model.addAttribute("listDetailOrder",listOrder );
+
+            return "/Fragments/user/purchase_history";
+        }
+
         return "/Fragments/user/purchase_history";
     }
 
